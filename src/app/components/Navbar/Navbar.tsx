@@ -1,12 +1,12 @@
 'use client';
 
-import { Input, Badge, Dropdown, MenuProps } from 'antd';
+import { Input, Badge, Dropdown, Drawer, MenuProps } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { BiSearch } from 'react-icons/bi';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaPlus, FaMinus } from 'react-icons/fa';
 
 const items: MenuProps['items'] = [
     {
@@ -37,21 +37,12 @@ const items: MenuProps['items'] = [
     },
 ];
 
-const categories = [
-    "Mens",
-    "Womens",
-    "Kids",
-    "Face Mask",
-    "Sports",
-    "New Arrival",
-    "Top Selling",
-];
-
 const Navbar: React.FC = () => {
     const [cartCount, setCartCount] = useState<number>(0);
     const [showMinimalNavbar, setShowMinimalNavbar] = useState(false);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [expandedCategories, setExpandedCategories] = useState<{ [key: string]: boolean }>({});
+console.log(setCartCount)
     useEffect(() => {
         let lastScrollY = window.scrollY;
 
@@ -68,19 +59,31 @@ const Navbar: React.FC = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const toggleCategory = (category: string) => {
+        setExpandedCategories((prev) => ({
+            ...prev,
+            [category]: !prev[category],
+        }));
+    };
+
     return (
         <>
             {/* Main Navbar */}
             <nav
-                className={`fixed top-0 left-0 w-full flex items-center justify-between bg-white shadow-md px-24 py-4 transition-transform duration-300 ${showMinimalNavbar ? '-translate-y-full' : 'translate-y-0'
-                    }`}
+                className={`fixed top-0 left-0 w-full flex flex-wrap gap-4 md:flex-row justify-center md:items-center md:justify-between bg-white shadow-md px-24 py-4 transition-transform duration-300 ${
+                    showMinimalNavbar ? '-translate-y-full' : 'translate-y-0'
+                }`}
             >
                 {/* Logo */}
                 <Link href="/">
                     <span className="text-2xl font-bold cursor-pointer">MyShop</span>
                 </Link>
 
-                <Dropdown menu={{ items }} trigger={['hover']} overlayClassName="p-2 bg-white shadow-lg rounded-md">
+                <Dropdown
+                    menu={{ items }}
+                    trigger={['hover']}
+                    overlayClassName="p-2 bg-white shadow-lg rounded-md"
+                >
                     <span className="cursor-pointer flex items-center text-lg font-semibold">
                         Shop <MdKeyboardArrowDown className="ml-1" />
                     </span>
@@ -103,20 +106,24 @@ const Navbar: React.FC = () => {
 
             {/* Minimal Navbar on Scroll */}
             <nav
-                className={`fixed top-0 left-0 w-full flex items-center justify-between bg-white shadow-md px-6 py-3 transition-transform duration-300 ${showMinimalNavbar ? 'translate-y-0' : '-translate-y-full'
-                    }`}
+                className={`fixed top-0 left-0 w-full flex items-center justify-between bg-white shadow-md px-6 py-3 transition-transform duration-300 ${
+                    showMinimalNavbar ? 'translate-y-0' : '-translate-y-full'
+                }`}
             >
-                <div className='flex gap-3 items-center'>
-                    {/* Bars Icon (Opens Sidebar) */}
-                    <FaBars className="text-2xl cursor-pointer" onClick={() => setIsSidebarOpen(true)} />
-
-                    {/* Logo */}
-                    <Link href="/">
-                        <span className="text-xl font-bold cursor-pointer">MyShop</span>
-                    </Link>
+                <div className="flex gap-3 items-center">
+                    {/* Bars Icon triggers the sidebar */}
+                    <div onClick={() => setSidebarOpen(true)} className="cursor-pointer">
+                        <FaBars />
+                    </div>
+                    <div>
+                        {/* Logo */}
+                        <Link href="/">
+                            <span className="text-xl font-bold cursor-pointer">MyShop</span>
+                        </Link>
+                    </div>
                 </div>
 
-                <div className='flex gap-3'>
+                <div className="flex gap-3">
                     {/* Search Icon */}
                     <BiSearch className="text-2xl cursor-pointer" />
 
@@ -129,34 +136,48 @@ const Navbar: React.FC = () => {
                 </div>
             </nav>
 
-            {/* Sidebar */}
-            <div
-                className={`fixed top-0 left-0 w-64 h-full bg-white shadow-lg transition-transform transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-                    } z-50`}
+            {/* Sidebar Drawer */}
+            <Drawer
+                title="Categories"
+                placement="left"
+                onClose={() => setSidebarOpen(false)}
+                open={sidebarOpen}
             >
-                {/* Sidebar Header */}
-                <div className="flex justify-between items-center p-4 border-b">
-                    <h2 className="text-lg font-semibold">Categories</h2>
-                    <FaTimes className="text-2xl cursor-pointer" onClick={() => setIsSidebarOpen(false)} />
-                </div>
+                <ul className="space-y-4">
 
-                {/* Sidebar Content */}
-                <div className="p-4 space-y-3">
-                    {categories.map((category, index) => (
-                        <span key={index} className="block text-lg cursor-pointer hover:bg-gray-100 p-2 rounded-md">
-                            {category}
+                    {/* Mens Category */}
+                    <li className="flex justify-between items-center cursor-pointer">
+                        <span>Mens</span>
+                        <span onClick={() => toggleCategory('mens')} className="cursor-pointer">
+                            {expandedCategories['mens'] ? <FaMinus /> : <FaPlus />}
                         </span>
-                    ))}
-                </div>
-            </div>
+                    </li>
+                    {expandedCategories['mens'] && (
+                        <ul className="ml-4 space-y-2 text-gray-600">
+                            <li>Half Sleeve T-shirt</li>
+                            <li>Full Sleeve T-shirt</li>
+                        </ul>
+                    )}
 
-            {/* Overlay (Closes Sidebar when clicked outside) */}
-            {isSidebarOpen && (
-                <div
-                    className="fixed inset-0 bg-black bg-opacity-50 z-40"
-                    onClick={() => setIsSidebarOpen(false)}
-                ></div>
-            )}
+                    {/* Womens Category */}
+                    <li className="flex justify-between items-center cursor-pointer">
+                        <span>Womens</span>
+                        <span onClick={() => toggleCategory('womens')} className="cursor-pointer">
+                            {expandedCategories['womens'] ? <FaMinus /> : <FaPlus />}
+                        </span>
+                    </li>
+                    {expandedCategories['womens'] && (
+                        <ul className="ml-4 space-y-2 text-gray-600">
+                            <li>Pajamas</li>
+                            <li>Pants</li>
+                            <li>Palazzo</li>
+                        </ul>
+                    )}
+
+                    {/* Kids Category */}
+                    <li>Kids</li>
+                </ul>
+            </Drawer>
         </>
     );
 };

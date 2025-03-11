@@ -28,72 +28,34 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
-        <div>dfdf</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
+       <div>Text for scroll</div>
       </body>
     </html>
   );

@@ -1,7 +1,7 @@
 'use client';
 
 import { Input, Badge, Dropdown, Drawer, MenuProps } from 'antd';
-import { ShoppingCartOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { MdKeyboardArrowDown } from 'react-icons/md';
@@ -47,7 +47,7 @@ console.log(setCartCount)
         let lastScrollY = window.scrollY;
 
         const handleScroll = () => {
-            if (window.scrollY > lastScrollY && window.scrollY > 100) {
+            if (window.scrollY > lastScrollY && window.scrollY > 50) {
                 setShowMinimalNavbar(true);
             } else {
                 setShowMinimalNavbar(false);
@@ -65,21 +65,27 @@ console.log(setCartCount)
             [category]: !prev[category],
         }));
     };
-
+  
     return (
         <>
             {/* Main Navbar */}
-            <nav
-                className={`fixed top-0 left-0 w-full flex flex-wrap gap-4 md:flex-row justify-center md:items-center md:justify-between bg-white shadow-md px-24 py-4 transition-transform duration-300 ${
-                    showMinimalNavbar ? '-translate-y-full' : 'translate-y-0'
-                }`}
-            >
-                {/* Logo */}
-                <Link href="/">
-                    <span className="text-2xl font-bold cursor-pointer">MyShop</span>
-                </Link>
+         
+            <header className="w-full">
+      {/* Announcement Bar */}
+      <div className="bg-black text-yellow-400 text-center text-sm py-2">
+        ⚡ EXCLUSIVE T-SHIRTS ON SALE | Limited time only <span className="ml-1">➡️</span>
+      </div>
 
-                <Dropdown
+      {/* Main Navbar */}
+      <nav className="flex items-center justify-between bg-white shadow-md px-8 md:px-24 py-4">
+        {/* Logo */}
+        <Link href="/" className="text-2xl font-bold flex items-center">
+          <span className="text-gray-900">My</span>
+          <span className="text-gray-500">Shop</span>
+        </Link>
+
+        {/* Shop Dropdown */}
+        <Dropdown
                     menu={{ items }}
                     trigger={['hover']}
                     overlayClassName="p-2 bg-white shadow-lg rounded-md"
@@ -89,24 +95,34 @@ console.log(setCartCount)
                     </span>
                 </Dropdown>
 
-                {/* Search Field */}
-                <Input.Search
-                    placeholder="Search products..."
-                    className="w-1/3"
-                    onSearch={(value) => console.log('Search:', value)}
-                />
+        {/* Search Input */}
+        <Input.Search
+          placeholder="Search Products by Titles or Tags"
+          className="w-1/3"
+          size="large"
+          onSearch={(value) => console.log("Search:", value)}
+        />
 
-                {/* Cart Icon */}
-                <Link href="/cart">
-                    <Badge count={cartCount} showZero>
-                        <ShoppingCartOutlined className="text-2xl cursor-pointer" />
-                    </Badge>
-                </Link>
-            </nav>
+        {/* Right Section - Help, Login, Cart */}
+        <div className="flex items-center gap-6">
+          <Link href="/help" className="text-gray-700 text-sm hover:text-black">
+            Help
+          </Link>
+          <Link href="/login" className="text-gray-700 text-sm hover:text-black flex items-center">
+            <UserOutlined className="mr-1" /> Login
+          </Link>
+          <Link href="/cart">
+            <Badge count={cartCount} showZero>
+              <ShoppingCartOutlined className="text-2xl text-gray-800 cursor-pointer" />
+            </Badge>
+          </Link>
+        </div>
+      </nav>
+    </header>
 
             {/* Minimal Navbar on Scroll */}
             <nav
-                className={`fixed top-0 left-0 w-full flex items-center justify-between bg-white shadow-md px-6 py-3 transition-transform duration-300 ${
+                className={`fixed z-40 top-0 left-0 w-full flex items-center justify-between bg-white shadow-md px-8 md:px-24 py-4 transition-transform duration-300 ${
                     showMinimalNavbar ? 'translate-y-0' : '-translate-y-full'
                 }`}
             >

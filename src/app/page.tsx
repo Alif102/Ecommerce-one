@@ -1,18 +1,25 @@
-import Image from "next/image";
+import Banner from "./components/Banner/Banner";
+import KidsOutfit from "./components/KidsOutfit/KidsOutfit";
 import Navbar from "./components/Navbar/Navbar";
-import banner from '../../public/assets/bnr.jpg'
+
+import NewArrival from "./components/Products/NewArrival";
 export default function Home() {
   return (
     <div className="">
      <Navbar/>
-     <div className=" mt-16">
-     <Image 
-      src={banner} 
-      alt="Description" 
-      // width={500} 
-      // height={300} 
-    />
+     <div>
+      <Banner/>
      </div>
+     <div>
+      <NewArrival />
+     </div>
+     <div>
+      <KidsOutfit />
+     </div>
+    
+   
+
+    
     
     </div>
   );

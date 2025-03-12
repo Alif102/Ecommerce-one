@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, Col, Row } from 'antd';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { useState } from 'react';
 import p1 from '../../../../public/assets/p1.jpg';
 import p2 from '../../../../public/assets/p2.jpg';
@@ -10,7 +10,7 @@ import p4 from '../../../../public/assets/p4.jpg';
 
 type Product = {
   title: string;
-  image: any;
+  image: StaticImageData;
   inStock: boolean;
   sizes: string[];
   colors: string[];

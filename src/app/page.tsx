@@ -1,4 +1,5 @@
 import Banner from "./components/Banner/Banner";
+import FeaturedProducts from "./components/FeauturedProducts/FeaturedProducts";
 import KidsOutfit from "./components/KidsOutfit/KidsOutfit";
 import Navbar from "./components/Navbar/Navbar";
 
@@ -15,6 +16,9 @@ export default function Home() {
      </div>
      <div>
       <KidsOutfit />
+     </div>
+     <div>
+      <FeaturedProducts />
      </div>
     
    

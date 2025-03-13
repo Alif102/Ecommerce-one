@@ -2,7 +2,9 @@
 
 import { Card, Col, Row } from 'antd';
 import Image, { StaticImageData } from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import AOS styles
 import p1 from '../../../../public/assets/p1.jpg';
 import p2 from '../../../../public/assets/p2.jpg';
 import p3 from '../../../../public/assets/p3.jpg';
@@ -64,6 +66,13 @@ const products: Product[] = [
 export default function NewArrival() {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 2000, // Animation duration in milliseconds
+      once: false, // Whether animation should happen only once
+    });
+  }, []);
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center px-4">
@@ -72,7 +81,12 @@ export default function NewArrival() {
 
       <Row gutter={[16, 16]} className="mt-4">
         {products.map((product, index) => (
-          <Col key={index} xs={12} sm={8} md={6} lg={4}>
+          <Col 
+            key={index} 
+            xs={12} sm={8} md={6} lg={4}
+            data-aos="fade-up" // AOS animation effect
+            data-aos-delay={index * 100} // Staggered effect
+          >
             <div 
               className="relative group cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-105 " 
               onMouseEnter={() => setHoverIndex(index)} 

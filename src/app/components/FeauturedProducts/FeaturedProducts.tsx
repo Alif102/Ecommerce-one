@@ -3,14 +3,24 @@
 import React, { useState } from 'react';
 import { Button, Rate } from 'antd';
 import { HeartOutlined, EyeOutlined } from '@ant-design/icons';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { FaShoppingCart } from 'react-icons/fa';
 import f1 from '../../../../public/assets/f1.jpg';
 import f2 from '../../../../public/assets/f2.jpg';
 import f4 from '../../../../public/assets/f4.jpg';
 import f3 from '../../../../public/assets/f3.jpg';
 
-const products = [
+type Product = {
+  id: number;
+  name: string;
+  price: number;
+  originalPrice?: number;
+  image: StaticImageData; // ✅ Fix: Use correct type
+  label?: string;
+  colors?: string[];
+};
+
+const products: Product[] = [
   {
     id: 1,
     name: 'Classic Navy Slim Fit Blazer',
@@ -50,9 +60,9 @@ const FeaturedProducts: React.FC = () => {
     <div className="text-center py-12">
       <h2 className="text-3xl font-bold">Best Feature Fashion</h2>
       <p className="text-gray-500 max-w-2xl mx-auto mt-2">
-        Discover our best selling fashion essentials, curated just for you! Elevate your wardrobe with our must-have pieces.
+        Discover our best-selling fashion essentials, curated just for you! Elevate your wardrobe with our must-have pieces.
       </p>
-      <div className="grid sm:grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-6 px-6 mt-8">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-6 mt-8">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
@@ -61,17 +71,17 @@ const FeaturedProducts: React.FC = () => {
   );
 };
 
-const ProductCard: React.FC<{ product: any }> = ({ product }) => {
+const ProductCard: React.FC<{ product: Product }> = ({ product }) => { // ✅ Fix: Use Product type instead of 'any'
   const [hover, setHover] = useState(false);
 
   return (
     <div
-      className="relative  mx-auto border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition cursor-pointer duration-3000 "
+      className="relative mx-auto border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition cursor-pointer duration-3000"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <div className="relative ">
-        <Image src={product.image} alt={product.name} width={400} height={500} className=" w-full" />
+      <div className="relative">
+        <Image src={product.image} alt={product.name} width={400} height={500} className="w-full" />
 
         {/* Label */}
         {product.label && (
@@ -112,8 +122,6 @@ const ProductCard: React.FC<{ product: any }> = ({ product }) => {
           <p className="text-gray-500 line-through">${product.originalPrice}</p>
         ) : null}
         <p className="text-lg font-bold">${product.price}</p>
-  
-
       </div>
     </div>
   );

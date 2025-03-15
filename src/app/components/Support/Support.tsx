@@ -25,9 +25,9 @@ const features = [
 
 export default function Support() {
   return (
-    <div className="flex flex-wrap justify-center w-[80%] mx-auto border border-white-50 gap-2 py-8 px-4 my-5 rounded-md bg-white-50 md:justify-between">
+    <div className=" grid grid-cols-4 justify-center w-[80%] mx-auto  gap-6 py-8 px-4 my-5 rounded-md bg-white-50 md:justify-between">
       {features.map((feature, index) => (
-        <div key={index} className="flex  items-center border border-white-100 p-6 rounded-lg shadow-md space-x-3 md:space-x-5">
+        <div key={index} className="flex justify-evenly  items-center border border-white-100 bg-[#f2f0ea] p-6 rounded-lg shadow-md ">
           <span className="hover:animate-pulse">{feature.icon}</span>
           <div>
             <h3 className="text-lg font-semibold">{feature.title}</h3>

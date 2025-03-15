@@ -8,7 +8,7 @@ import Navbar from "./components/Navbar/Navbar";
 import NewArrival from "./components/Products/NewArrival";
 import SellBanner from "./components/SellBanner/SellBanner";
 import FooterComponent from "./components/Footer/Footer";
-// import Support from "./components/Support/Support";
+import Support from "./components/Support/Support";
 export default function Home() {
   return (
     <div className="">
@@ -33,9 +33,9 @@ export default function Home() {
      <div>
       <FeaturedProducts />
      </div>
-     {/* <div>
+     <div>
       <Support />
-     </div> */}
+     </div>
      <div>
       <FooterComponent />
      </div>

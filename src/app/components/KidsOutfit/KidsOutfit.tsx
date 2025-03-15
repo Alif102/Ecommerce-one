@@ -80,7 +80,7 @@ export default function KidsOutfit() {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-center">Popular Fashion Designs For Children</h1>
       <p className="text-center text-gray-600 max-w-2xl mx-auto my-4">
         MyShop features a massive collection of stylish and colorful designs. Our products have been made according to the latest fashion trends.
@@ -100,7 +100,7 @@ export default function KidsOutfit() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.map((product) => (
-       <div key={product.id} className="shadow-md bg-white  rounded-lg  ">
+       <div key={product.id} className="shadow-[0_0px_4px_rgba(0,_0,_0,_0.2)] bg-white  rounded-lg  ">
        <div className="overflow-hidden">
          <Image
            src={product.image}

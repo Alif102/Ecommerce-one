@@ -96,10 +96,14 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => { // ✅ Fi
             hover ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'
           } transform origin-bottom overlay`}
         >
-          <Button className="bg-white rounded-2xl text-gray-700 flex items-center mb-4 gap-2 px-6 py-5 transition duration-300 hover:bg-sky-800">
-            <FaShoppingCart className="text-lg" />
-            Add To Cart
-          </Button>
+          <Button className="bg-white rounded-2xl text-gray-700 flex items-center mb-4 gap-2 px-6 py-5 transition-all duration-300 ease-in-out relative overflow-hidden group">
+  <span className="absolute inset-0 bg-black transform translate-y-full group-hover:translate-y-0 transition-all duration-300 ease-in-out"></span>
+  <span className="relative flex items-center gap-2 text-gray-700 group-hover:text-white transition-all duration-300">
+    <FaShoppingCart className="text-lg" />
+    Add To Cart
+  </span>
+</Button>
+
         </div>
 
         {/* Icons on Hover */}

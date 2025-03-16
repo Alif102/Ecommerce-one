@@ -97,7 +97,7 @@ console.log(setCartCount)
                 </Dropdown>
 
         {/* Search Input */}
-        <div className="flex w-1/3">
+        <div className="flex w-1/3 md:block hidden">
       <input
         type="text"
         placeholder="Search Products by Titles or Tags"

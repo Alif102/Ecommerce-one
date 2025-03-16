@@ -1,27 +1,59 @@
 "use client";
 
-import React from "react";
-import { Carousel } from "antd";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import banner from "../../../../public/assets/bnr.jpg";
 import banner2 from "../../../../public/assets/bnr2.jpg";
 
+const images = [banner2, banner]; // Array of images
+
 const Banner: React.FC = () => {
-  const onChange = (currentSlide: number) => {
-    console.log("Current slide:", currentSlide);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Auto-slide every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
+  };
+
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
   return (
-    <div className="w-full z-10 mx-auto">
-      <Carousel autoplay afterChange={onChange} dots>
-      <div>
-          <Image src={banner2} alt="Banner 2" className="w-full h-auto" priority />
-        </div>
-        <div>
-          <Image src={banner} alt="Banner 1" className="w-full h-auto" priority />
-        </div>
-        
-      </Carousel>
+    <div className="relative w-full mx-auto overflow-hidden">
+      {/* Images */}
+      <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+        {images.map((img, index) => (
+          <div key={index} className="w-full flex-shrink-0">
+            <Image src={img} alt={`Banner ${index + 1}`} className="w-full h-auto" priority />
+          </div>
+        ))}
+      </div>
+
+      {/* Left Button */}
+      <button onClick={prevSlide} className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-900">
+        <HiChevronLeft className="w-6 h-6" />
+      </button>
+
+      {/* Right Button */}
+      <button onClick={nextSlide} className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-900">
+        <HiChevronRight className="w-6 h-6" />
+      </button>
+
+      {/* Dots */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+        {images.map((_, index) => (
+          <span key={index} className={`w-3 h-3 rounded-full ${currentIndex === index ? "bg-white" : "bg-gray-500"}`} />
+        ))}
+      </div>
     </div>
   );
 };

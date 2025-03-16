@@ -120,7 +120,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => { // ✅ Fi
       </div>
 
       <div className="p-4">
-        <Rate disabled defaultValue={5} className="text-yellow-500 mb-2" />
+        <Rate disabled defaultValue={5} className="text-yellow-500 flex justify-center mb-2" />
         <h3 className="text-lg font-semibold">{product.name}</h3>
         {product.originalPrice ? (
           <p className="text-gray-500 line-through">${product.originalPrice}</p>

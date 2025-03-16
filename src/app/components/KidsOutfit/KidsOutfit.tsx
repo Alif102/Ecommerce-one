@@ -86,7 +86,7 @@ export default function KidsOutfit() {
         MyShop features a massive collection of stylish and colorful designs. Our products have been made according to the latest fashion trends.
       </p>
 
-      <div className="flex justify-center gap-4 my-6">
+      <div className="flex justify-center flex-wrap gap-4 my-6">
         {categories.map((category) => (
           <Button
             key={category}
@@ -111,7 +111,7 @@ export default function KidsOutfit() {
          />
        </div>
        <div className="flex justify-between px-4 items-center mt-2">
-         <Rate disabled defaultValue={0} className="text-gray-400" />
+         <Rate disabled defaultValue={2} className="text-gray-400 flex" />
          <span className="text-gray-400">(0)</span>
        </div>
        <h3 className="text-lg font-semibold px-4 mt-2">{product.name}</h3>

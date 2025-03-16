@@ -1,12 +1,13 @@
 'use client';
 
-import { Input, Badge, Dropdown, Drawer, MenuProps } from 'antd';
-import { ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
+import {  Dropdown, Drawer, MenuProps } from 'antd';
+import {  UserOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { BiSearch } from 'react-icons/bi';
 import { FaBars, FaPlus, FaMinus } from 'react-icons/fa';
+import { HiSearch, HiShoppingCart } from 'react-icons/hi';
 
 const items: MenuProps['items'] = [
     {
@@ -38,7 +39,7 @@ const items: MenuProps['items'] = [
 ];
 
 const Navbar: React.FC = () => {
-    const [cartCount, setCartCount] = useState<number>(0);
+    const [cartCount, setCartCount] = useState<number>(3);
     const [showMinimalNavbar, setShowMinimalNavbar] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [expandedCategories, setExpandedCategories] = useState<{ [key: string]: boolean }>({});
@@ -96,12 +97,19 @@ console.log(setCartCount)
                 </Dropdown>
 
         {/* Search Input */}
-        <Input.Search
-          placeholder="Search Products by Titles or Tags"
-          className="w-1/3"
-          size="large"
-          onSearch={(value) => console.log("Search:", value)}
-        />
+        <div className="flex w-1/3">
+      <input
+        type="text"
+        placeholder="Search Products by Titles or Tags"
+        className="w-full px-4 py-2 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+       
+      />
+      <button
+        className="px-4 py-2 bg-black text-white rounded-r-lg hover:bg-blue-700 flex items-center"
+      >
+        <HiSearch className="w-5 h-5" />
+      </button>
+    </div>
 
         {/* Right Section - Help, Login, Cart */}
         <div className="flex items-center gap-6">
@@ -112,9 +120,16 @@ console.log(setCartCount)
             <UserOutlined className="mr-1" /> Login
           </Link>
           <Link href="/cart">
-            <Badge count={cartCount} showZero>
-              <ShoppingCartOutlined className="text-2xl text-gray-800 cursor-pointer" />
-            </Badge>
+          <div className="relative cursor-pointer">
+      {/* Badge */}
+      {cartCount > 0 && (
+        <span className="absolute -top-4 -right-4 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
+          {cartCount}
+        </span>
+      )}
+      {/* Shopping Cart Icon */}
+      <HiShoppingCart className="text-2xl text-gray-800" />
+    </div>
           </Link>
         </div>
       </nav>
@@ -145,9 +160,16 @@ console.log(setCartCount)
 
                     {/* Cart Icon */}
                     <Link href="/cart">
-                        <Badge count={cartCount} showZero>
-                            <ShoppingCartOutlined className="text-2xl cursor-pointer" />
-                        </Badge>
+                    <div className="relative cursor-pointer">
+      {/* Badge */}
+      {cartCount > 0 && (
+        <span className="absolute -top-4 -right-4 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
+          {cartCount}
+        </span>
+      )}
+      {/* Shopping Cart Icon */}
+      <HiShoppingCart className="text-2xl text-gray-800" />
+    </div>
                     </Link>
                 </div>
             </nav>

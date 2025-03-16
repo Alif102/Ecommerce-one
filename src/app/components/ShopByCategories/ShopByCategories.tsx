@@ -9,6 +9,7 @@ import c4 from '../../../../public/assets/c4.png';
 import c5 from '../../../../public/assets/c5.png';
 import c6 from '../../../../public/assets/c6.png';
 import c7 from '../../../../public/assets/c7.png';
+import Link from 'next/link'; // Import Link for navigation
 
 // Array of categories
 const categories = [
@@ -26,22 +27,26 @@ const ShopByCategories = () => {
   return (
     <div className="w-full py-10 px-5">
       <h2 className="text-2xl font-bold mb-5 text-center">Shop By Categories</h2>
+      
       <div className="w-full md:w-3/4 mx-auto">
         <AntCarousel autoplay={true} dots={true} slidesToShow={4} arrows>
           {categories.map((category, index) => (
-       <div key={index}>
-       <Image
-         src={category.image}
-         alt={category.name}
-         width={300}
-         height={300}
-         className="rounded-t-full hover:rounded-t-lg px-4 object-cover transition-all duration-500 cursor-pointer ease-in-out transform hover:scale-y-105"
-       />
-       <p className=' flex justify-center mr-10 mt-5 font-semibold text-lg'>{category.name} </p>
-     </div>
-     
-      
-         
+            <div key={index}>
+               <Link href={`/categories/${category.name.toLowerCase()}`}>
+              <Image
+                src={category.image}
+                alt={category.name}
+                width={300}
+                height={300}
+                className="rounded-t-full hover:rounded-t-lg px-4 object-cover transition-all duration-500 cursor-pointer ease-in-out transform hover:scale-y-105"
+              />
+              {/* Wrap category name with Link for dynamic routing */}
+             
+                <p className="flex justify-center mr-10 mt-5 font-semibold text-lg cursor-pointer">
+                  {category.name}
+                </p>
+              </Link>
+            </div>
           ))}
         </AntCarousel>
       </div>

@@ -21,8 +21,7 @@
 //   }
 // } satisfies Config;
 
-
-const flowbite = require("flowbite-react/tailwind");
+const flowbite = require("flowbite/plugin");
 import type { Config } from "tailwindcss";
 import daisyui from "daisyui";
 
@@ -31,7 +30,7 @@ export default {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    flowbite.content(),
+    "./node_modules/flowbite-react/**/*.js", // Ensures Flowbite components work properly
   ],
   theme: {
     extend: {
@@ -41,8 +40,9 @@ export default {
       },
     },
   },
-  plugins: [daisyui, flowbite.plugin()],
+  plugins: [daisyui, flowbite], // Corrected Flowbite plugin usage
   daisyui: {
     themes: ["light", "dark"],
   },
 } satisfies Config;
+

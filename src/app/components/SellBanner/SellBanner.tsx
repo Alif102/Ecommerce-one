@@ -19,7 +19,7 @@ const SellBanner = () => {
             speed: -20 
           },
           {
-            speed: -15,
+            speed: -20,
             children: (
               <div
                 className="absolute inset-0 flex items-center justify-center"

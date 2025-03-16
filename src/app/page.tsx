@@ -9,6 +9,7 @@ import NewArrival from "./components/Products/NewArrival";
 import SellBanner from "./components/SellBanner/SellBanner";
 import FooterComponent from "./components/Footer/Footer";
 import Support from "./components/Support/Support";
+import ShopByCategories from "./components/ShopByCategories/ShopByCategories";
 export default function Home() {
   return (
     <div className="">
@@ -18,6 +19,9 @@ export default function Home() {
      </div>
      <div>
       <NewArrival />
+     </div>
+     <div>
+      <ShopByCategories />
      </div>
      <div>
       <KidsOutfit />

@@ -4,9 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import axios from "axios";
-import shopBanner from '../../../../public/assets/shop-banner.webp'
-import { FaArrowAltCircleLeft } from "react-icons/fa";
-import { MdOutlineArrowForwardIos } from "react-icons/md";
+
 import SidebarFilters from "./SidebarFilters";
 interface Product {
   id: number;

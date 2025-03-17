@@ -4,7 +4,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import axios from "axios";
-
+import shopBanner from '../../../../public/assets/shop-banner.webp'
+import { FaArrowAltCircleLeft } from "react-icons/fa";
+import { MdOutlineArrowForwardIos } from "react-icons/md";
+import SidebarFilters from "./SidebarFilters";
 interface Product {
   id: number;
   name: string;
@@ -48,19 +51,33 @@ const CategoryPage = () => {
 
   return (
     <div className="w-full py-10 px-5">
-      <h2 className="text-2xl font-bold mb-5 text-center">Category: {categoryName}</h2>
+<div
+  className="relative bg-cover bg-center h-60 flex flex-col items-center justify-center text-white"
+  style={{ backgroundImage: "url('/assets/shop-banner.webp')" }} // ✅ Correct path
+>
+  <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+  <h2 className="relative text-2xl uppercase font-bold text-center">{categoryName}</h2>
 
-      <div className=" grid grid-cols-1 md:grid-cols-12 gap-5  p-5">
+ <div className=" flex flex-row">
+ <p className=" text-white opacity-60">Home &gt; {categoryName || "Loading..."}</p>
+
+ </div>
+</div>
+{/* <SidebarFilters/> */}
+
+
+      <div className=" grid grid-cols-1 lg:grid-cols-12 gap-5  p-5">
 
         {/* left side */}
-        <div className=" col-span-12 md:col-span-3 bg-green-200">
-        Filter items coming....
+        <div className=" col-span-12 lg:col-span-2  ">
+        <SidebarFilters/>
+        
         </div>
 
 
 
         {/* right side */}
-        <div className=" col-span-12 md:col-span-9 bg-purple-200">
+        <div className=" col-span-12 lg:col-span-10 ">
         {products.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.map((product) => (

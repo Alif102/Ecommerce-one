@@ -14,16 +14,16 @@ export default function Home() {
   return (
     <div className="">
      <Navbar/>
-     {/* <div>
+     <div>
       <Banner/>
      </div>
      <div>
       <NewArrival />
-     </div> */}
+     </div>
      <div>
       <ShopByCategories />
      </div>
-     {/* <div>
+     <div>
       <KidsOutfit />
      </div>
      <div>
@@ -39,7 +39,7 @@ export default function Home() {
      </div>
      <div>
       <Support />
-     </div> */}
+     </div>
      <div>
       <FooterComponent />
      </div>
@@ -119,18 +119,3 @@ export default function Home() {
 //     </div>
 //   );
 // }
-
-
-
-
-
-// [
-//     { "name": "Shoes", "image": "/assets/c1.png" },
-//     { "name": "Tops", "image": "/assets/c2.png" },
-//     { "name": "Jewelries", "image": "/assets/c3.png" },
-//     { "name": "Shirt", "image": "/assets/c4.png" },
-//     { "name": "Watch", "image": "/assets/c2.png" },
-//     { "name": "Bags", "image": "/assets/c5.png" },
-//     { "name": "Gown", "image": "/assets/c6.png" },
-//     { "name": "Sunglasses", "image": "/assets/c7.png" }
-//   ]

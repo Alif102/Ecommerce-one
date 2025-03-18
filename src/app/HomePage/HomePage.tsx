@@ -1,16 +1,47 @@
- "use client"
+"use client"
+import { ParallaxProvider } from "react-scroll-parallax";
+import FeaturedProducts from "../components/FeauturedProducts/FeaturedProducts";
+import KidsOutfit from "../components/KidsOutfit/KidsOutfit";
 
-
-import HomePage from "./HomePage/HomePage";
-export default function Home() {
+import NewArrival from "../components/Products/NewArrival";
+import SellBanner from "../components/SellBanner/SellBanner";
+import FooterComponent from "../components/Footer/Footer";
+import Support from "../components/Support/Support";
+import ShopByCategories from "../components/ShopByCategories/ShopByCategories";
+import Banner from "../components/Banner/Banner";
+export default function HomePage() {
   return (
     <div className="">
-     
-
+  
      <div>
-      <HomePage />
+      <Banner/>
      </div>
-    
+     <div>
+      <NewArrival />
+     </div>
+     <div>
+      <ShopByCategories />
+     </div>
+     <div>
+      <KidsOutfit />
+     </div>
+     <div>
+     <ParallaxProvider>
+      <div className="overflow-x-hidden">
+      <SellBanner />
+      </div>
+    </ParallaxProvider>
+      
+     </div>
+     <div>
+      <FeaturedProducts />
+     </div>
+     <div>
+      <Support />
+     </div>
+     <div>
+      <FooterComponent />
+     </div>
     
    
 

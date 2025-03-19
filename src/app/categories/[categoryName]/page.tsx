@@ -8,6 +8,7 @@ import SidebarFilters from "./SidebarFilters";
 import { Button, Rate } from "antd";
 import { FaShoppingCart } from "react-icons/fa";
 import { HeartOutlined, EyeOutlined } from "@ant-design/icons";
+import Link from "next/link";
 
 interface Product {
   id: number;
@@ -88,12 +89,16 @@ const CategoryPage = () => {
           {filteredProducts.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredProducts.map((product) => (
-                <div
-                  key={product.id}
-                  className="border p-4 rounded-lg shadow-lg"
-                  onMouseEnter={() => setHovered((prev) => ({ ...prev, [product.id]: true }))}
-                  onMouseLeave={() => setHovered((prev) => ({ ...prev, [product.id]: false }))}
-                >
+           
+           <Link 
+           key={product.id} 
+           href={`/product/${product.id}`} 
+           passHref
+           className="border p-4 rounded-lg shadow-lg"
+           onMouseEnter={() => setHovered((prev) => ({ ...prev, [product.id]: true }))}
+           onMouseLeave={() => setHovered((prev) => ({ ...prev, [product.id]: false }))}
+         >
+         
                   <div className="relative mx-auto  rounded-lg overflow-hidden  transition cursor-pointer">
                     <div className="relative">
                       <Image src={product.image} alt={product.name} width={400} height={400} className="w-full" />
@@ -132,7 +137,9 @@ const CategoryPage = () => {
                       <p className="text-lg text-center font-bold">${product.price}</p>
                     </div>
                   </div>
-                </div>
+                </Link>
+             
+                
               ))}
             </div>
           ) : (

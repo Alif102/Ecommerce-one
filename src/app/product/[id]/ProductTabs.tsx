@@ -44,7 +44,10 @@ const items = [
 ];
 
 const ProductTabs = () => {
-  return <Tabs defaultActiveKey="2" items={items} className={"p-4"} />;
+  return <div className=' w-[80%] mx-auto border-t-2'>
+    <Tabs defaultActiveKey="2" items={items} className={"p-4"} />;
+
+  </div> 
 };
 
 export default ProductTabs;

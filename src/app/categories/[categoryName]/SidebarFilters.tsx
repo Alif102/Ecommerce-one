@@ -5,20 +5,20 @@ import axios from 'axios';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import Link from 'next/link';
 
 interface Category {
   id: number;
-  name: string;
+  brand: string;
 }
 
 // Props interface
 interface SidebarFiltersProps {
   priceRange: [number, number];
-  setPriceRange: (value: [number, number]) => void;
+  setPriceRange: React.Dispatch<React.SetStateAction<[number, number]>>;
+  brands: string[]; // ✅ Add this line
 }
 
-const SidebarFilters: React.FC<SidebarFiltersProps> = ({ priceRange, setPriceRange }) => {
+const SidebarFilters: React.FC<SidebarFiltersProps> = ({ priceRange, setPriceRange , brands}) => {
   const [collectionsOpen, setCollectionsOpen] = useState<boolean>(true);
   const [availabilityOpen, setAvailabilityOpen] = useState<boolean>(true);
   const [priceOpen, setPriceOpen] = useState<boolean>(true);
@@ -47,16 +47,16 @@ const SidebarFilters: React.FC<SidebarFiltersProps> = ({ priceRange, setPriceRan
         </div>
         {collectionsOpen && (
           <ul className="mt-2 space-y-1 text-gray-700">
-            {categories.map((category) => (
-              <li key={category.id} className="cursor-pointer hover:px-2 transition duration-300 hover:text-black">
-                <Link href={`/categories/${category.name.toLowerCase()}`} className="block w-full h-full">
-                  {category.name}
-                </Link>
-              </li>
-            ))}
+            {brands.map((brand, index) => (
+          <li key={index} className="flex items-center space-x-2">
+            <input type="checkbox" id={`brand-${index}`} className="form-checkbox h-4 w-4 text-blue-600" />
+            <label htmlFor={`brand-${index}`} className="text-gray-700">{brand}</label>
+          </li>
+        ))}
           </ul>
         )}
       </div>
+    
 
       <hr className="my-4" />
 

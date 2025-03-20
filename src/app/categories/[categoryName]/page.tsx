@@ -15,6 +15,7 @@ interface Product {
   name: string;
   image: string;
   price: number;
+  brand: string;  // Ensure brand field exists
 }
 
 interface Category {
@@ -29,8 +30,8 @@ const CategoryPage = () => {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 450]);
+  const [brands, setBrands] = useState<string[]>([]); // 🔹 Store unique brands
 
-  // 🔹 Maintain hover states for individual products using an object
   const [hovered, setHovered] = useState<{ [key: number]: boolean }>({});
 
   useEffect(() => {
@@ -43,7 +44,11 @@ const CategoryPage = () => {
 
         if (categoryData) {
           setProducts(categoryData.products);
-          setFilteredProducts(categoryData.products); // Initially set to all products
+          setFilteredProducts(categoryData.products);
+
+          // 🔹 Extract unique brands
+          const uniqueBrands = Array.from(new Set(categoryData.products.map((p) => p.brand)));
+          setBrands(uniqueBrands);
         }
       } catch (error) {
         console.error("Error fetching category products:", error);
@@ -55,7 +60,6 @@ const CategoryPage = () => {
     fetchCategoryProducts();
   }, [categoryName]);
 
-  // Update filtered products when price range changes
   useEffect(() => {
     const filtered = products.filter(
       (product) => product.price >= priceRange[0] && product.price <= priceRange[1]
@@ -81,7 +85,7 @@ const CategoryPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 p-5">
         {/* Left Sidebar */}
         <div className="col-span-12 lg:col-span-2">
-          <SidebarFilters priceRange={priceRange} setPriceRange={setPriceRange} />
+          <SidebarFilters priceRange={priceRange} setPriceRange={setPriceRange} brands={brands} />
         </div>
 
         {/* Product Grid */}
@@ -89,21 +93,17 @@ const CategoryPage = () => {
           {filteredProducts.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredProducts.map((product) => (
-           
-           <Link 
-           key={product.id} 
-           href={`/product/${product.id}`} 
-           passHref
-           className="border p-4 rounded-lg shadow-lg"
-           onMouseEnter={() => setHovered((prev) => ({ ...prev, [product.id]: true }))}
-           onMouseLeave={() => setHovered((prev) => ({ ...prev, [product.id]: false }))}
-         >
-         
-                  <div className="relative mx-auto  rounded-lg overflow-hidden  transition cursor-pointer">
+                <Link 
+                  key={product.id} 
+                  href={`/product/${product.id}`} 
+                  passHref
+                  className="border p-4 rounded-lg shadow-lg"
+                  onMouseEnter={() => setHovered((prev) => ({ ...prev, [product.id]: true }))}
+                  onMouseLeave={() => setHovered((prev) => ({ ...prev, [product.id]: false }))}
+                >
+                  <div className="relative mx-auto rounded-lg overflow-hidden transition cursor-pointer">
                     <div className="relative">
                       <Image src={product.image} alt={product.name} width={400} height={400} className="w-full" />
-
-                      {/* Overlay Effect */}
                       <div
                         className={`absolute inset-0 bg-black bg-opacity-45 flex items-end justify-center transition-transform duration-500 ${
                           hovered[product.id] ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0"
@@ -117,8 +117,6 @@ const CategoryPage = () => {
                           </span>
                         </Button>
                       </div>
-
-                      {/* Icons on Hover */}
                       {hovered[product.id] && (
                         <div className="absolute top-2 right-2 flex flex-col space-y-2">
                           <button className="bg-white p-2 rounded-full shadow-md">
@@ -130,16 +128,14 @@ const CategoryPage = () => {
                         </div>
                       )}
                     </div>
-
                     <div className="p-4">
-                      <Rate disabled defaultValue={5} className="text-yellow-500 flex  justify-center mb-2" />
+                      <Rate disabled defaultValue={5} className="text-yellow-500 flex justify-center mb-2" />
                       <h3 className="text-lg text-center font-semibold">{product.name}</h3>
                       <p className="text-lg text-center font-bold">${product.price}</p>
+                      <p className="text-lg text-center font-bold">{product.brand}</p>
                     </div>
                   </div>
                 </Link>
-             
-                
               ))}
             </div>
           ) : (

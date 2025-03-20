@@ -6,10 +6,7 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
-interface Category {
-  id: number;
-  brand: string;
-}
+
 
 interface SidebarFiltersProps {
   priceRange: [number, number];

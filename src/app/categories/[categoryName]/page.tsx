@@ -1,5 +1,5 @@
-"use client";
-
+// CategoryPage.tsx
+"use client"
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
@@ -15,7 +15,7 @@ interface Product {
   name: string;
   image: string;
   price: number;
-  brand: string;  // Ensure brand field exists
+  brand: string;
 }
 
 interface Category {
@@ -31,7 +31,7 @@ const CategoryPage = () => {
   const [loading, setLoading] = useState(true);
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 450]);
   const [brands, setBrands] = useState<string[]>([]); // 🔹 Store unique brands
-
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]); // 🔹 Selected brands for filtering
   const [hovered, setHovered] = useState<{ [key: number]: boolean }>({});
 
   useEffect(() => {
@@ -62,10 +62,13 @@ const CategoryPage = () => {
 
   useEffect(() => {
     const filtered = products.filter(
-      (product) => product.price >= priceRange[0] && product.price <= priceRange[1]
+      (product) =>
+        product.price >= priceRange[0] &&
+        product.price <= priceRange[1] &&
+        (selectedBrands.length === 0 || selectedBrands.includes(product.brand))
     );
     setFilteredProducts(filtered);
-  }, [priceRange, products]);
+  }, [priceRange, selectedBrands, products]);
 
   if (loading) return <div className="text-center py-10">Loading...</div>;
 
@@ -85,7 +88,13 @@ const CategoryPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 p-5">
         {/* Left Sidebar */}
         <div className="col-span-12 lg:col-span-2">
-          <SidebarFilters priceRange={priceRange} setPriceRange={setPriceRange} brands={brands} />
+          <SidebarFilters
+            priceRange={priceRange}
+            setPriceRange={setPriceRange}
+            brands={brands}
+            selectedBrands={selectedBrands}
+            setSelectedBrands={setSelectedBrands}
+          />
         </div>
 
         {/* Product Grid */}
@@ -93,9 +102,9 @@ const CategoryPage = () => {
           {filteredProducts.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredProducts.map((product) => (
-                <Link 
-                  key={product.id} 
-                  href={`/product/${product.id}`} 
+                <Link
+                  key={product.id}
+                  href={`/product/${product.id}`}
                   passHref
                   className="border p-4 rounded-lg shadow-lg"
                   onMouseEnter={() => setHovered((prev) => ({ ...prev, [product.id]: true }))}
@@ -103,7 +112,13 @@ const CategoryPage = () => {
                 >
                   <div className="relative mx-auto rounded-lg overflow-hidden transition cursor-pointer">
                     <div className="relative">
-                      <Image src={product.image} alt={product.name} width={400} height={400} className="w-full" />
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        width={400}
+                        height={400}
+                        className="w-full"
+                      />
                       <div
                         className={`absolute inset-0 bg-black bg-opacity-45 flex items-end justify-center transition-transform duration-500 ${
                           hovered[product.id] ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0"
@@ -119,27 +134,28 @@ const CategoryPage = () => {
                       </div>
                       {hovered[product.id] && (
                         <div className="absolute top-2 right-2 flex flex-col space-y-2">
-                          <button className="bg-white p-2 rounded-full shadow-md">
-                            <HeartOutlined className="text-gray-600" />
+                          <button className="bg-white p-2 rounded-full text-gray-800">
+                            <HeartOutlined />
                           </button>
-                          <button className="bg-white p-2 rounded-full shadow-md">
-                            <EyeOutlined className="text-gray-600" />
+                          <button className="bg-white p-2 rounded-full text-gray-800">
+                            <EyeOutlined />
                           </button>
                         </div>
                       )}
                     </div>
                     <div className="p-4">
-                      <Rate disabled defaultValue={5} className="text-yellow-500 flex justify-center mb-2" />
-                      <h3 className="text-lg text-center font-semibold">{product.name}</h3>
-                      <p className="text-lg text-center font-bold">${product.price}</p>
-                      <p className="text-lg text-center font-bold">{product.brand}</p>
+                    <p className="text-2xl   font-bold"> ${product.price}</p>
+                    <h3 className="text-[16px] flex items-center gap-2  font-semibold"><h1 className=" text-gray-600">{product.name}</h1> <Rate disabled defaultValue={4} className="text-yellow-500 flex" /></h3>
+
+                      <p className="text-[16px]  font-semi-bold text-gray-600">{product.brand}</p>
+
                     </div>
                   </div>
                 </Link>
               ))}
             </div>
           ) : (
-            <p className="text-center text-gray-500">No products found in this price range.</p>
+            <div>No products found for this category.</div>
           )}
         </div>
       </div>

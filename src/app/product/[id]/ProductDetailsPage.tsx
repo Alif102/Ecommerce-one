@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import axios from "axios";
@@ -51,17 +51,59 @@ const ProductDetailsPage = () => {
 
     fetchProduct();
   }, [id]);
+  const [showLens, setShowLens] = useState(false);
+  const [lensPosition, setLensPosition] = useState({ x: 0, y: 0, bgX: "0%", bgY: "0%" });
+  const imgRef = useRef<HTMLDivElement>(null);
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!imgRef.current) return;
+
+    const { left, top, width, height } = imgRef.current.getBoundingClientRect();
+    const x = e.clientX - left;
+    const y = e.clientY - top;
+
+    // Calculate background position for zoom effect
+    const bgX = `${(x / width) * 100}%`;
+    const bgY = `${(y / height) * 100}%`;
+
+    setLensPosition({ x, y, bgX, bgY });
+  };
   if (loading) return <div className="text-center py-10">Loading...</div>;
   if (!product) return <div className="text-center py-10">Product not found.</div>;
 
   return (
     <div className="max-w-5xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
       
-      {/* Left Side - Product Image */}
-      <div className="flex justify-center">
-        <Image src={product.image} alt={product.name} width={400} height={400} className="rounded-lg" />
-      </div>
+      <div
+      className="relative  overflow-hidden rounded-lg"
+      ref={imgRef}
+      onMouseEnter={() => setShowLens(true)}
+      onMouseLeave={() => setShowLens(false)}
+      onMouseMove={handleMouseMove}
+    >
+      {/* Main Image */}
+      <Image
+        src={product.image}
+        alt={product.name}
+        width={400}
+        height={400}
+        className="rounded-lg"
+      />
+
+      {/* Magnifying Glass */}
+      {showLens && (
+        <div
+          className="absolute w-[100px] h-[100px] border-2 border-gray-300 rounded-full pointer-events-none"
+          style={{
+            top: lensPosition.y - 50,
+            left: lensPosition.x - 50,
+            backgroundImage: `url(${product.image})`,
+            backgroundSize: "800px 800px", // Adjust zoom level
+            backgroundPosition: `${lensPosition.bgX} ${lensPosition.bgY}`,
+          }}
+        />
+      )}
+    </div>
 
       {/* Right Side - Product Details */}
       <div className="space-y-4">

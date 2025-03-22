@@ -8,6 +8,7 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 import { BiSearch } from 'react-icons/bi';
 import { FaBars, FaPlus, FaMinus } from 'react-icons/fa';
 import { HiSearch, HiShoppingCart } from 'react-icons/hi';
+import { useCart } from '@/app/providers/CartProvider';
 
 const items: MenuProps['items'] = [
     {
@@ -39,11 +40,9 @@ const items: MenuProps['items'] = [
 ];
 
 const Navbar: React.FC = () => {
-    const [cartCount, setCartCount] = useState<number>(3);
     const [showMinimalNavbar, setShowMinimalNavbar] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [expandedCategories, setExpandedCategories] = useState<{ [key: string]: boolean }>({});
-console.log(setCartCount)
     useEffect(() => {
         let lastScrollY = window.scrollY;
 
@@ -66,6 +65,8 @@ console.log(setCartCount)
             [category]: !prev[category],
         }));
     };
+    const { cartCount } = useCart(); // Get cart count from context
+
   
     return (
         <>
@@ -123,10 +124,10 @@ console.log(setCartCount)
           <div className="relative cursor-pointer">
       {/* Badge */}
       {cartCount > 0 && (
-        <span className="absolute -top-4 -right-4 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
-          {cartCount}
-        </span>
-      )}
+          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+            {cartCount}
+          </span>
+        )}
       {/* Shopping Cart Icon */}
       <HiShoppingCart className="text-2xl text-gray-800" />
     </div>

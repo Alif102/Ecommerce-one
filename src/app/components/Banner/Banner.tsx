@@ -5,7 +5,8 @@ import Image from "next/image";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import banner from "../../../../public/assets/bnr.jpg";
 import banner2 from "../../../../public/assets/bnr2.jpg";
-
+import left1 from '../../../../public/assets/left1.png'
+import right from '../../../../public/assets/right1.png'
 const images = [banner2, banner]; // Array of images
 
 const Banner: React.FC = () => {
@@ -39,13 +40,21 @@ const Banner: React.FC = () => {
       </div>
 
       {/* Left Button */}
-      <button onClick={prevSlide} className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-900">
-        <HiChevronLeft className="w-6 h-6" />
+      <button onClick={prevSlide} className="absolute left-2 top-1/2 transform -translate-y-1/2  bg-white hover:bg-yellow-300  p-2 rounded-full ">
+          <Image
+                         src = {left1}
+                         alt='arrow'
+                       
+                       />
       </button>
 
       {/* Right Button */}
-      <button onClick={nextSlide} className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-900">
-        <HiChevronRight className="w-6 h-6" />
+      <button onClick={nextSlide} className="absolute right-2 top-1/2 transform -translate-y-1/2  hover:bg-yellow-300 bg-white p-2 rounded-full ">
+      <Image
+                         src = {right}
+                         alt='arrow'
+                       
+                       />
       </button>
 
       {/* Dots */}

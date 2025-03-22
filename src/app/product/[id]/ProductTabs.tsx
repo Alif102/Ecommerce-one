@@ -8,9 +8,9 @@ const items = [
     label: 'Description',
     children: (
       <p className="p-4 text-gray-600">
-       If "ZARA Crimson" refers to a specific product or collection from the fashion brand ZARA, I recommend checking the official ZARA website, visiting ZARA stores, or contacting ZARA's customer service for the most accurate and up-to-date information. Product names, collections, and availability can vary, and the brand's official channels are the best sources for the latest details.
+       If ZARA Crimson refers to a specific product or collection from the fashion brand ZARA. I recommend checking the official ZARA website, visiting ZARA stores, or contacting ZARAs customer service for the most accurate and up-to-date information. Product names, collections, and availability can vary, and the brand official channels are the best sources for the latest details.
 
-You can also explore ZARA's official website or visit their stores to find information about the "Crimson" product or collection. If there have been any updates or new releases since my last knowledge update, you should be able to find them on the official ZARA platform.
+You can also explore  official website or visit their stores to find information about the Crimson product or collection. If there have been any updates or new releases since my last knowledge update, you should be able to find them on the official ZARA platform.
       </p>
     ),
   },

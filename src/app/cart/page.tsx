@@ -1,5 +1,6 @@
 "use client";
 import { useCart } from "@/app/providers/CartProvider";
+import Image from "next/image";
 
 const CartPage = () => {
   const { cartItems, removeFromCart, clearCart } = useCart();
@@ -15,7 +16,15 @@ const CartPage = () => {
           {cartItems.map((item) => (
             <li key={item.id} className="flex justify-between items-center p-2 border-b">
               <div className="flex items-center gap-4">
-                {item.image && <img src={item.image} alt={item.name} className="w-16 h-16" />}
+              {item.image && (
+  <Image 
+    src={item.image} 
+    alt={item.name} 
+    width={64} 
+    height={64} 
+    className="w-16 h-16"
+  />
+)}
                 <div>
                   <h3 className="text-lg font-semibold">{item.name}</h3>
                   <p>Price: ${item.price}</p>

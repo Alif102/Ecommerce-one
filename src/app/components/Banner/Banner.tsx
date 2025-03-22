@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import banner from "../../../../public/assets/bnr.jpg";
 import banner2 from "../../../../public/assets/bnr2.jpg";
 import left1 from '../../../../public/assets/left1.png'

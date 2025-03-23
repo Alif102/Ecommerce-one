@@ -5,11 +5,11 @@
       "name": "Shoes",
       "image": "/assets/c1.png",
       "products": [
-        { "id": 1, "name": "Running Shoes", "image": "/assets/p1.png", "color": "Black", "variation": "Size: 8-12", "price": 50, "brand": "Nike" },
-        { "id": 2, "name": "Casual Sneakers", "image": "/assets/c11.png", "color": "White", "variation": "Size: 7-11", "price": 40, "brand": "Adidas" },
-        { "id": 3, "name": "Leather Boots", "image": "/assets/p3.png", "color": "Brown", "variation": "Size: 6-12", "price": 80, "brand": "Timberland" },
-        { "id": 4, "name": "Sports Shoes", "image": "/assets/p4.png", "color": "Blue", "variation": "Size: 8-13", "price": 60, "brand": "Puma" },
-        { "id": 5, "name": "Formal Shoes", "image": "/assets/p5.png", "color": "Black", "variation": "Size: 7-11", "price": 70, "brand": "Clarks" }
+        { "id": 1, "name": "Running Shoes", "image": "/assets/p1.png", "color": "Black", "variation": "Size: 8-12", "price": 530, "brand": "Nike" },
+        { "id": 2, "name": "Casual Sneakers", "image": "/assets/c11.png", "color": "White", "variation": "Size: 7-11", "price": 430, "brand": "Adidas" },
+        { "id": 3, "name": "Leather Boots", "image": "/assets/p3.png", "color": "Brown", "variation": "Size: 6-12", "price": 830, "brand": "Timberland" },
+        { "id": 4, "name": "Sports Shoes", "image": "/assets/p4.png", "color": "Blue", "variation": "Size: 8-13", "price": 630, "brand": "Puma" },
+        { "id": 5, "name": "Formal Shoes", "image": "/assets/p5.png", "color": "Black", "variation": "Size: 7-11", "price": 730, "brand": "Clarks" }
       ]
     },
     {
@@ -17,11 +17,11 @@
       "name": "Tops",
       "image": "/assets/c2.png",
       "products": [
-        { "id": 6, "name": "Casual T-Shirt", "image": "/assets/p6.png", "color": "Red", "variation": "Size: S-XL", "price": 25, "brand": "H&M" },
-        { "id": 7, "name": "Printed Shirt", "image": "/assets/c4.png", "color": "Blue", "variation": "Size: M-XXL", "price": 30, "brand": "Zara" },
-        { "id": 8, "name": "Formal Blouse", "image": "/assets/p8.png", "color": "White", "variation": "Size: S-L", "price": 35, "brand": "Gucci" },
-        { "id": 9, "name": "Tank Top", "image": "/assets/c11.png", "color": "Black", "variation": "Size: XS-L", "price": 20, "brand": "Forever 21" },
-        { "id": 10, "name": "Denim Jacket", "image": "/assets/p10.png", "color": "Denim Blue", "variation": "Size: M-XL", "price": 50, "brand": "Levi's" }
+        { "id": 6, "name": "Casual T-Shirt", "image": "/assets/p6.png", "color": "Red", "variation": "Size: S-XL", "price": 235, "brand": "H&M" },
+        { "id": 7, "name": "Printed Shirt", "image": "/assets/c4.png", "color": "Blue", "variation": "Size: M-XXL", "price": 330, "brand": "Zara" },
+        { "id": 8, "name": "Formal Blouse", "image": "/assets/p8.png", "color": "White", "variation": "Size: S-L", "price": 335, "brand": "Gucci" },
+        { "id": 9, "name": "Tank Top", "image": "/assets/c11.png", "color": "Black", "variation": "Size: XS-L", "price": 230, "brand": "Forever 21" },
+        { "id": 10, "name": "Denim Jacket", "image": "/assets/p10.png", "color": "Denim Blue", "variation": "Size: M-XL", "price": 530, "brand": "Levi's" }
       ]
     },
     {
@@ -29,11 +29,11 @@
       "name": "Jewelries",
       "image": "/assets/c3.png",
       "products": [
-        { "id": 11, "name": "Gold Necklace", "image": "/assets/p11.png", "color": "Gold", "variation": "Weight: 10g", "price": 1200, "brand": "Tiffany & Co." },
-        { "id": 12, "name": "Silver Bracelet", "image": "/assets/p12.png", "color": "Silver", "variation": "Weight: 5g", "price": 60, "brand": "Cartier" },
-        { "id": 13, "name": "Diamond Ring", "image": "/assets/c3.png", "color": "Silver", "variation": "Size: 6-10", "price": 2000, "brand": "Bvlgari" },
-        { "id": 14, "name": "Pearl Earrings", "image": "/assets/p14.png", "color": "White", "variation": "Weight: 3g", "price": 80, "brand": "Chanel" },
-        { "id": 15, "name": "Gemstone Pendant", "image": "/assets/p15.png", "color": "Blue", "variation": "Weight: 8g", "price": 90, "brand": "Swarovski" }
+        { "id": 11, "name": "Gold Necklace", "image": "/assets/p11.png", "color": "Gold", "variation": "Weight: 10g", "price": 13200, "brand": "Tiffany & Co." },
+        { "id": 12, "name": "Silver Bracelet", "image": "/assets/p12.png", "color": "Silver", "variation": "Weight: 5g", "price": 630, "brand": "Cartier" },
+        { "id": 13, "name": "Diamond Ring", "image": "/assets/c3.png", "color": "Silver", "variation": "Size: 6-10", "price": 23000, "brand": "Bvlgari" },
+        { "id": 14, "name": "Pearl Earrings", "image": "/assets/p14.png", "color": "White", "variation": "Weight: 3g", "price": 830, "brand": "Chanel" },
+        { "id": 15, "name": "Gemstone Pendant", "image": "/assets/p15.png", "color": "Blue", "variation": "Weight: 8g", "price": 930, "brand": "Swarovski" }
       ]
     },
     {
@@ -41,11 +41,11 @@
       "name": "Sunglasses",
       "image": "/assets/c7.png",
       "products": [
-        { "id": 21, "name": "Aviator Sunglasses", "image": "/assets/c11.png", "color": "Black", "variation": "Lens Size: 58mm", "price": 70, "brand": "Ray-Ban" },
-        { "id": 22, "name": "Wayfarer Sunglasses", "image": "/assets/c7.png", "color": "Brown", "variation": "Lens Size: 54mm", "price": 60, "brand": "Oakley" },
-        { "id": 23, "name": "Round Sunglasses", "image": "/assets/p23.png", "color": "Gold", "variation": "Lens Size: 50mm", "price": 55, "brand": "Gucci" },
-        { "id": 24, "name": "Oversized Sunglasses", "image": "/assets/p24.png", "color": "Black", "variation": "Lens Size: 60mm", "price": 90, "brand": "Dior" },
-        { "id": 25, "name": "Sport Sunglasses", "image": "/assets/p25.png", "color": "Blue", "variation": "Lens Size: 62mm", "price": 85, "brand": "Nike" }
+        { "id": 21, "name": "Aviator Sunglasses", "image": "/assets/c11.png", "color": "Black", "variation": "Lens Size: 58mm", "price": 730, "brand": "Ray-Ban" },
+        { "id": 22, "name": "Wayfarer Sunglasses", "image": "/assets/c7.png", "color": "Brown", "variation": "Lens Size: 54mm", "price": 630, "brand": "Oakley" },
+        { "id": 23, "name": "Round Sunglasses", "image": "/assets/p23.png", "color": "Gold", "variation": "Lens Size: 50mm", "price": 535, "brand": "Gucci" },
+        { "id": 24, "name": "Oversized Sunglasses", "image": "/assets/p24.png", "color": "Black", "variation": "Lens Size: 60mm", "price": 930, "brand": "Dior" },
+        { "id": 25, "name": "Sport Sunglasses", "image": "/assets/p25.png", "color": "Blue", "variation": "Lens Size: 62mm", "price": 835, "brand": "Nike" }
       ]
     },
     {
@@ -53,11 +53,11 @@
       "name": "Gown",
       "image": "/assets/c6.png",
       "products": [
-        { "id": 26, "name": "Evening Gown", "image": "/assets/c6.png", "color": "Red", "variation": "Size: S-XL", "price": 3000, "brand": "Versace" },
-        { "id": 27, "name": "Ball Gown", "image": "/assets/p27.png", "color": "Blue", "variation": "Size: M-XXL", "price": 3500, "brand": "Dolce & Gabbana" },
-        { "id": 28, "name": "Wedding Gown", "image": "/assets/p28.png", "color": "White", "variation": "Size: S-XXL", "price": 5000, "brand": "Vera Wang" },
-        { "id": 29, "name": "Casual Maxi Dress", "image": "/assets/p29.png", "color": "Green", "variation": "Size: S-L", "price": 2000, "brand": "Chanel" },
-        { "id": 30, "name": "Cocktail Dress", "image": "/assets/p30.png", "color": "Black", "variation": "Size: M-XL", "price": 2500, "brand": "Gucci" }
+        { "id": 26, "name": "Evening Gown", "image": "/assets/c6.png", "color": "Red", "variation": "Size: S-XL", "price": 33000, "brand": "Versace" },
+        { "id": 27, "name": "Ball Gown", "image": "/assets/p27.png", "color": "Blue", "variation": "Size: M-XXL", "price": 33500, "brand": "Dolce & Gabbana" },
+        { "id": 28, "name": "Wedding Gown", "image": "/assets/p28.png", "color": "White", "variation": "Size: S-XXL", "price": 53000, "brand": "Vera Wang" },
+        { "id": 29, "name": "Casual Maxi Dress", "image": "/assets/p29.png", "color": "Green", "variation": "Size: S-L", "price": 23000, "brand": "Chanel" },
+        { "id": 30, "name": "Cocktail Dress", "image": "/assets/p30.png", "color": "Black", "variation": "Size: M-XL", "price": 23500, "brand": "Gucci" }
       ]
     }
   ]

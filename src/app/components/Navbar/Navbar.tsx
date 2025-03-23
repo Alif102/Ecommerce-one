@@ -66,7 +66,7 @@ const Navbar: React.FC = () => {
         }));
     };
     const { cartCount } = useCart(); // Get cart count from context
-
+console.log(cartCount)
   
     return (
         <>

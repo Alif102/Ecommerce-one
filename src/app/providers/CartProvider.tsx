@@ -17,6 +17,8 @@ interface CartContextType {
   addToCart: (product: Product) => void;
   removeFromCart: (id: number) => void;
   clearCart: () => void;
+  updateCartItem: (id: number, quantity: number) => void; // Add updateCartItem
+
 }
 
 // Create Context
@@ -49,7 +51,14 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const clearCart = () => {
     setCartItems([]);
   };
-
+  const updateCartItem = (id: number, quantity: number) => {
+    setCartItems((prevCart) =>
+      prevCart.map((item) =>
+        item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
+      )
+    );
+  };
+  
   return (
     <CartContext.Provider
       value={{
@@ -58,6 +67,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         addToCart,
         removeFromCart,
         clearCart,
+        updateCartItem
+
       }}
     >
       {children}

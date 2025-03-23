@@ -7,6 +7,7 @@ import axios from "axios";
 import {  HeartOutlined } from "@ant-design/icons";
 import {  FaHelmetSafety } from "react-icons/fa6";
 import { FaFirstOrder, FaShoppingBasket } from "react-icons/fa";
+import { useCart } from "@/app/providers/CartProvider";
 
 // Define TypeScript interfaces for product structure
 interface Product {
@@ -21,6 +22,7 @@ interface Product {
   brand: string;
   colors: string[];
   sizes: string[];
+  quantity: number;
 }
 
 const ProductDetailsPage = () => {
@@ -29,6 +31,8 @@ const ProductDetailsPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const { addToCart } = useCart();
+
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -161,10 +165,16 @@ const ProductDetailsPage = () => {
 
         {/* Action Buttons */}
         <div className="flex gap-4 ">
-          <button   className="w-full  bg-transparent text-black border  border-black hover:bg-green-200 hover:border-green-100 hover:text-green-600 p-2 rounded-lg flex items-center justify-center gap-2">
-         <FaShoppingBasket />   <p>Add to Cart</p>
-          </button>
-          <button  className="w-full bg-black text-white  p-2 rounded-lg">
+        <button
+  onClick={() => addToCart({ ...product, quantity: product.quantity ?? 1 })}
+  className="relative w-full rounded-md px-3.5 py-2 overflow-hidden border-2 font-medium border-black text-black group"
+>
+  <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-black top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+  <span className="relative flex items-center justify-center gap-2 transition duration-300 group-hover:text-white ease">
+    <FaShoppingBasket /> Add to Cart
+  </span>
+</button>
+          <button  className="w-full bg-black text-white hover:bg-white hover:text-black hover:border-black border  p-2 rounded-lg">
             Buy Now
           </button>
         </div>

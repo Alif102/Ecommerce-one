@@ -31,7 +31,7 @@ const CategoryPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 450]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1200]);
   const [brands, setBrands] = useState<string[]>([]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [hovered, setHovered] = useState<{ [key: number]: boolean }>({});

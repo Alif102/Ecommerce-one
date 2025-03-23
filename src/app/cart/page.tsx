@@ -2,28 +2,35 @@
 import { useCart } from "@/app/providers/CartProvider";
 import Image from "next/image";
 import React from "react";
-import { Table } from "antd";
-import "antd/dist/reset.css"; // Ensure AntD styles are included
+import { Table, TableColumnsType } from "antd";
+import "antd/dist/reset.css";
 import Link from "next/link";
+
+interface CartItem {
+  id: number;
+  name: string;
+  image?: string;
+  quantity: number;
+  price: number;
+}
 
 const CartPage: React.FC = () => {
   const { cartItems, removeFromCart, updateCartItem } = useCart();
 
   const increaseQuantity = (id: number) => {
-    updateCartItem(id, cartItems.find(item => item.id === id)?.quantity! + 1);
+    updateCartItem(id, (cartItems.find(item => item.id === id)?.quantity || 0) + 1);
   };
 
   const decreaseQuantity = (id: number) => {
-    updateCartItem(id, cartItems.find(item => item.id === id)?.quantity! - 1);
+    updateCartItem(id, Math.max((cartItems.find(item => item.id === id)?.quantity || 0) - 1, 1));
   };
 
-  // Define AntD Table Columns
-  const columns = [
+  const columns: TableColumnsType<CartItem> = [
     {
       title: "Product",
       dataIndex: "name",
       key: "name",
-      render: (text: string, record: any) => (
+      render: (text, record) => (
         <div className="flex items-center gap-4">
           {record.image && (
             <Image src={record.image} alt={text} width={50} height={50} className="rounded" />
@@ -36,7 +43,7 @@ const CartPage: React.FC = () => {
       title: "Quantity",
       dataIndex: "quantity",
       key: "quantity",
-      render: (_: any, record: any) => (
+      render: (_, record) => (
         <div className="flex items-center gap-2">
           <button
             onClick={() => decreaseQuantity(record.id)}
@@ -54,27 +61,23 @@ const CartPage: React.FC = () => {
         </div>
       ),
     },
-    
     {
       title: "Price",
       dataIndex: "price",
       key: "price",
-      render: (text: number) => `$${text.toFixed(2)}`,
+      render: (text) => `$${text.toFixed(2)}`,
     },
     {
       title: "Total",
       key: "total",
-      render: (_: any, record: any) => (
-        <span className="w-16 text-center inline-block">
-          ${ (record.price * record.quantity).toFixed(1) }
-        </span>
+      render: (_, record) => (
+        <span className="w-16 text-center inline-block">${(record.price * record.quantity).toFixed(2)}</span>
       ),
     },
-    
     {
       title: "Action",
       key: "action",
-      render: (_: any, record: any) => (
+      render: (_, record) => (
         <button onClick={() => removeFromCart(record.id)} className="btn btn-xs text-red-500">
           Remove
         </button>
@@ -83,82 +86,54 @@ const CartPage: React.FC = () => {
   ];
 
   return (
-    <div className=" mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Cart Items */}
         <div className="lg:col-span-2">
-          <h3 className="text-2xl font-semibold border-b border-t py-5 mb-6">
-            My Shopping Cart
-          </h3>
+          <h3 className="text-2xl font-semibold border-b border-t py-5 mb-6">My Shopping Cart</h3>
           {cartItems.length === 0 ? (
             <p className="text-center text-gray-600">Your cart is empty.</p>
           ) : (
             <div className="overflow-x-auto border lg:h-96 overflow-y-auto rounded-lg">
-              <Table
-                columns={columns}
-                dataSource={cartItems.map(item => ({ ...item, key: item.id }))}
-                pagination={false}
-                scroll={{ x: "max-content" }}
-              />
+              <Table columns={columns} dataSource={cartItems.map(item => ({ ...item, key: item.id }))} pagination={false} scroll={{ x: "max-content" }} />
             </div>
           )}
         </div>
-
-        {/* Order Summary */}
-       {/* Order Summary */}
-<div className="p-6 rounded-lg shadow-lg bg-white ">
-  <h3 className="text-xl font-semibold border-b pb-2 mb-4">
-    Order Summary
-  </h3>
-  <div className="flex justify-between py-2 text-lg">
-    <span>Sub Total</span>
-    <span>
-      $
-      {cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)}
-    </span>
-  </div>
-  <div className="flex justify-between py-2 text-gray-500">
-    <span>Shipping</span>
-    <span>Free*</span>
-  </div>
-  <div className="flex justify-between py-2 text-gray-500">
-    <span>Pickup Fee</span>
-    <span>$10.00</span>
-  </div>
-
-  {/* Coupon Code */}
-  <div className="mt-4 flex">
-    <input
-      type="text"
-      placeholder="Coupon code"
-      className="input input-bordered w-full rounded-r-none"
-    />
-    <button className="btn bg-black text-white rounded-l-none">Apply</button>
-  </div>
-
-  {/* Total Calculation */}
-  <div className="flex justify-between text-xl font-bold mt-4">
-    <span>Total</span>
-    <span>
-      $
-      {(
-        cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0) + 10
-      ).toFixed(2)}
-    </span>
-  </div>
-
-  <div className="relative mt-5 w-full text-center inline-block text-lg cursor-pointer group">
-    <span className="relative z-10 block px-12 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
-      <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
-      <span className="absolute left-0 w-full h-48 transition-all duration-700 origin-top-right rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:rotate-180 ease"></span>
-     <Link href='/order-successfull'>
-     <span className="relative md:text-sm whitespace-nowrap">PROCESSED CHECKOUT</span>
-     </Link> 
-    </span>
-    <span className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-gray-900 rounded-lg group-hover:mb-0 group-hover:mr-0"></span>
-  </div>
-</div>
-
+        <div className="p-6 rounded-lg shadow-lg bg-white">
+          <h3 className="text-xl font-semibold border-b pb-2 mb-4">Order Summary</h3>
+          <div className="flex justify-between py-2 text-lg">
+            <span>Sub Total</span>
+            <span>${cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)}</span>
+          </div>
+          <div className="flex justify-between py-2 text-gray-500">
+            <span>Shipping</span>
+            <span>Free*</span>
+          </div>
+          <div className="flex justify-between py-2 text-gray-500">
+            <span>Pickup Fee</span>
+            <span>$10.00</span>
+          </div>
+          <div className="mt-4 flex">
+            <input type="text" placeholder="Coupon code" className="input input-bordered w-full rounded-r-none" />
+            <button className="btn bg-black text-white rounded-l-none">Apply</button>
+          </div>
+          <div className="flex justify-between text-xl font-bold mt-4">
+            <span>Total</span>
+            <span>${(cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0) + 10).toFixed(2)}</span>
+          </div>
+          <Link href='/order-successfull'>
+          <div className="relative mt-5 w-full text-center inline-block text-lg cursor-pointer group">
+            
+            <span className="relative z-10 block px-12 py-3 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
+              <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
+              <span className="absolute left-0 w-full h-48 transition-all duration-700 origin-top-right rotate-90 -translate-x-full translate-y-12 bg-gray-900 group-hover:rotate-180 ease"></span>
+              
+                <span className="relative md:text-sm whitespace-nowrap">PROCESSED CHECKOUT</span>
+             
+            </span>
+            <span className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-gray-900 rounded-lg group-hover:mb-0 group-hover:mr-0"></span>
+          </div>
+          </Link>
+        </div>
       </div>
     </div>
   );

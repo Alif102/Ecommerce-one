@@ -8,7 +8,7 @@ export default function OrderSuccess() {
           <div className=" flex justify-center items-center flex-col">
           <Image
                     src={pa1}
-                    alt='tic' className=" border border-yellow-500 p-3 rounded-full  bg-yellow-200  "
+                    alt='tic' className=" border border-yellow-500 p-3 w-32 rounded-full  bg-yellow-200  "
                   
                 />
                 <h1 className="text-5xl font-bold text-yellow-500">Thank you.</h1>

@@ -4,11 +4,12 @@ import { useParams } from "next/navigation";
 import Image from "next/image";
 import axios from "axios";
 import SidebarFilters from "./SidebarFilters";
-import { Button, Rate } from "antd";
+import { Button, Rate , Drawer } from "antd";
 import { FaShoppingCart } from "react-icons/fa";
 import { HeartOutlined, EyeOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useCart } from "@/app/providers/CartProvider";
+import { BarsOutlined } from "@ant-design/icons";
 
 interface Product {
   id: number;
@@ -35,6 +36,8 @@ const CategoryPage = () => {
   const [brands, setBrands] = useState<string[]>([]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [hovered, setHovered] = useState<{ [key: number]: boolean }>({});
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
   const { addToCart } = useCart(); // Access cart function
 
   useEffect(() => {
@@ -87,37 +90,65 @@ const CategoryPage = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 p-5">
-        {/* Sidebar */}
-        <div className="col-span-12 lg:col-span-2">
-          <SidebarFilters
-            priceRange={priceRange}
-            setPriceRange={setPriceRange}
-            brands={brands}
-            selectedBrands={selectedBrands}
-            setSelectedBrands={setSelectedBrands}
-          />
-        </div>
-
-        {/* Product Grid */}
-        <div className="col-span-12 lg:col-span-10">
-          {filteredProducts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredProducts.map((product) => (
-              <ProductCard
-              key={product.id}
-              product={{ ...product, quantity: product.quantity ?? 1 }} // Ensure quantity is always set
-              addToCart={addToCart}
-              hovered={hovered}
-              setHovered={setHovered}
-            />
-            
-              ))}
-            </div>
-          ) : (
-            <div>No products found for this category.</div>
-          )}
-        </div>
+      {/* Sidebar for Large Screens */}
+      <div className="hidden lg:block col-span-2">
+        <SidebarFilters
+          priceRange={priceRange}
+          setPriceRange={setPriceRange}
+          brands={brands}
+          selectedBrands={selectedBrands}
+          setSelectedBrands={setSelectedBrands}
+        />
       </div>
+
+      {/* Filter Button for Medium & Small Screens */}
+      <div className="block lg:hidden col-span-12">
+        <Button
+         
+          icon={<BarsOutlined />}
+          className=" border border-black"
+          onClick={() => setIsDrawerOpen(true)}
+        >
+          Filter
+        </Button>
+      </div>
+
+      {/* Product Grid */}
+      <div className="col-span-12 lg:col-span-10">
+        {filteredProducts.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={{ ...product, quantity: product.quantity ?? 1 }}
+                addToCart={addToCart}
+                hovered={hovered}
+                setHovered={setHovered}
+              />
+            ))}
+          </div>
+        ) : (
+          <div>No products found for this category.</div>
+        )}
+      </div>
+
+      {/* Ant Design Drawer for Sidebar */}
+      <Drawer
+        title="Filter Options"
+        placement="left"
+        onClose={() => setIsDrawerOpen(false)}
+        open={isDrawerOpen}
+        width={300}
+      >
+        <SidebarFilters
+          priceRange={priceRange}
+          setPriceRange={setPriceRange}
+          brands={brands}
+          selectedBrands={selectedBrands}
+          setSelectedBrands={setSelectedBrands}
+        />
+      </Drawer>
+    </div>
     </div>
   );
 };

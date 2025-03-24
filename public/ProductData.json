@@ -69,7 +69,11 @@
         { "id": 32, "name": "Sweatshirt Set", "image": "/assets/k2.webp", "color": "Multiple", "variation": "Size: S-XL", "price": 6.99, "brand": "KidsBrand", "category": "Children's Outfit" },
         { "id": 33, "name": "Seersucker Dress", "image": "/assets/k3.webp", "color": "Multiple", "variation": "Size: XS-L", "price": 22.99, "brand": "KidsBrand", "category": "Girl's Floral Dress" },
         { "id": 34, "name": "Raglan Sweater", "image": "/assets/k4.webp", "color": "Multiple", "variation": "Size: S-XXL", "price": 48.99, "brand": "KidsBrand", "category": "Kids Winter Wear" },
-        { "id": 35, "name": "Girls Knee-Length Dress", "image": "/assets/k5.webp", "color": "Multiple", "variation": "Size: M-XL", "price": 48.99, "brand": "KidsBrand", "category": "Best Selling Product" }
+        { "id": 36, "name": "Sweatshirt Set", "image": "/assets/k2.webp", "color": "Multiple", "variation": "Size: S-XL", "price": 6.99, "brand": "KidsBrand", "category": "Children's Outfit" },
+        { "id": 37, "name": "Seersucker Dress", "image": "/assets/k3.webp", "color": "Multiple", "variation": "Size: XS-L", "price": 22.99, "brand": "KidsBrand", "category": "Girl's Floral Dress" },
+        { "id": 35, "name": "Autumn Girl Dress", "image": "/assets/k1.webp", "color": "Multiple", "variation": "Size: S-L", "price": 16.99, "brand": "KidsBrand", "category": "Best Selling Product" },
+
+        { "id": 38, "name": "Girls Knee-Length Dress", "image": "/assets/k3.webp", "color": "Multiple", "variation": "Size: M-XL", "price": 48.99, "brand": "KidsBrand", "category": "Best Selling Product" }
       ]
     }
   ]

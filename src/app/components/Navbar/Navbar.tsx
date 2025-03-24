@@ -102,7 +102,7 @@ console.log(cartCount)
       <input
         type="text"
         placeholder="Search Products by Titles or Tags"
-        className="w-full px-4 py-2 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        className="w-full px-4 py-2 border border-gray-300 rounded-l-lg "
        
       />
       <button

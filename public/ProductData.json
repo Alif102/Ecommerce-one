@@ -59,6 +59,18 @@
         { "id": 29, "name": "Casual Maxi Dress", "image": "/assets/p29.png", "color": "Green", "variation": "Size: S-L", "price": 23000, "brand": "Chanel" },
         { "id": 30, "name": "Cocktail Dress", "image": "/assets/p30.png", "color": "Black", "variation": "Size: M-XL", "price": 23500, "brand": "Gucci" }
       ]
+    },
+    {
+      "id": 6,
+      "name": "Kids",
+      "image": "/assets/kids.jpg",
+      "products": [
+        { "id": 31, "name": "Autumn Girl Dress", "image": "/assets/k1.webp", "color": "Multiple", "variation": "Size: S-L", "price": 16.99, "brand": "KidsBrand", "category": "Best Selling Product" },
+        { "id": 32, "name": "Sweatshirt Set", "image": "/assets/k2.webp", "color": "Multiple", "variation": "Size: S-XL", "price": 6.99, "brand": "KidsBrand", "category": "Children's Outfit" },
+        { "id": 33, "name": "Seersucker Dress", "image": "/assets/k3.webp", "color": "Multiple", "variation": "Size: XS-L", "price": 22.99, "brand": "KidsBrand", "category": "Girl's Floral Dress" },
+        { "id": 34, "name": "Raglan Sweater", "image": "/assets/k4.webp", "color": "Multiple", "variation": "Size: S-XXL", "price": 48.99, "brand": "KidsBrand", "category": "Kids Winter Wear" },
+        { "id": 35, "name": "Girls Knee-Length Dress", "image": "/assets/k5.webp", "color": "Multiple", "variation": "Size: M-XL", "price": 48.99, "brand": "KidsBrand", "category": "Best Selling Product" }
+      ]
     }
   ]
 }

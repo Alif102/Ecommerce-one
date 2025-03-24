@@ -1,84 +1,53 @@
 'use client';
 
-import { useState } from 'react';
-import { Button, Rate } from 'antd';
+import { useEffect, useState } from 'react';
+import { Button } from 'antd';
 import Image from 'next/image';
-import 'tailwindcss/tailwind.css';
-import k1 from '../../../../public/assets/k1.webp'
-import k2 from '../../../../public/assets/k2.webp'
-import k4 from '../../../../public/assets/k4.webp'
-import k3 from '../../../../public/assets/k3.webp'
 
-
-const categories = [
-  'Best Selling Product',
-  "Children's Outfit",
-  "Girl's Floral Dress",
-  'Kids Winter Wear',
-];
-
-const products = [
-  {
-    id: 1,
-    name: 'Autumn Girl Dress',
-    price: 16.99,
-    image: k1,
-    colors: ['#0077ff', '#ff0000', '#008000', '#800080'],
-  },
-  {
-    id: 2,
-    name: 'Sweatshirt Set',
-    price: 6.99,
-    image: k2,
-    colors: ['#0077ff', '#ff0000', '#800080', '#ffcc00'],
-  },
-  {
-    id: 3,
-    name: 'Seersucker Dress',
-    price: 22.99,
-    image:k1,
-    colors: ['#00cccc', '#ffcc00', '#ffffff'],
-  },
-  {
-    id: 4,
-    name: 'Raglan Sweater',
-    price: 48.99,
-    image: k4,
-    colors: ['#800080', '#8b0000', '#008000'],
-  },
-  {
-    id: 5,
-    name: 'Raglan Sweater',
-    price: 48.99,
-    image: k2,
-    colors: ['#800080', '#8b0000', '#008000'],
-  },
-  {
-    id: 6,
-    name: 'Raglan Sweater',
-    price: 48.99,
-    image: k1,
-    colors: ['#800080', '#8b0000', '#008000'],
-  },
-  {
-    id: 7,
-    name: 'Raglan Sweater',
-    price: 48.99,
-    image: k3,
-    colors: ['#800080', '#8b0000', '#008000'],
-  },
-  {
-    id: 8,
-    name: 'Girls Knee-Length Dress',
-    price: 48.99,
-    image: k1,
-    colors: ['#800080', '#8b0000', '#008000'],
-  },
-];
+interface Product {
+  id: number;
+  name: string;
+  image: string;
+  color: string;
+  variation: string;
+  price: number;
+  brand: string;
+  category: string;
+}
 
 export default function KidsOutfit() {
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const [selectedCategory, setSelectedCategory] = useState<string>('Best Selling Product');
+  const [kidsProducts, setKidsProducts] = useState<Product[]>([]);
 
+  useEffect(() => {
+    const fetchKidsData = async () => {
+      try {
+        const response = await fetch('/ProductData.json');
+        if (!response.ok) throw new Error('Failed to fetch data');
+
+        const data = await response.json();
+        const kidsCategory = data.categories.find((category: { name: string }) => category.name === 'Kids');
+        setKidsProducts(kidsCategory?.products || []);
+      } catch (error) {
+        console.error('Error fetching kids data:', error);
+      }
+    };
+
+    fetchKidsData();
+  }, []);
+console.log(kidsProducts)
+  const categories: string[] = [
+    'Best Selling Product',
+    "Children's Outfit",
+    "Girl's Floral Dress",
+    'Kids Winter Wear',
+  ];
+
+  // Filter products based on the selected category
+  const filteredProducts = kidsProducts.filter(
+    (product) => product.category === selectedCategory
+  );
+console.log(filteredProducts)
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-center">Popular Fashion Designs For Children</h1>
@@ -98,38 +67,16 @@ export default function KidsOutfit() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.map((product) => (
-       <div key={product.id} className="shadow-[0_0px_4px_rgba(0,_0,_0,_0.2)] bg-white  rounded-lg  ">
-       <div className="overflow-hidden">
-         <Image
-           src={product.image}
-           alt={product.name}
-           width={200}
-           height={250}
-           className="mx-auto transform transition-transform duration-300 hover:scale-105 cursor-pointer"
-         />
-       </div>
-       <div className="flex justify-between px-4 items-center mt-2">
-         <Rate disabled defaultValue={2} className="text-gray-400 flex" />
-         <span className="text-gray-400">(0)</span>
-       </div>
-       <h3 className="text-lg font-semibold px-4 mt-2">{product.name}</h3>
-       <div className=' flex justify-between items-center gap-2 mb-3'>
-       <p className="text-gray-700 px-4">${product.price.toFixed(2)}</p>
-       <div className="flex px-4 gap-2">
-         {product.colors.map((color, index) => (
-           <span
-             key={index}
-             className="w-5 h-5 rounded-full border border-gray-300 cursor-pointer hover:opacity-75"
-             style={{ backgroundColor: color }}
-           ></span>
-         ))}
-       </div>
-       </div>
-      
-     </div>
-     
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {filteredProducts.map((product) => (
+          <div key={product.id} className="border p-4 rounded-lg shadow-md">
+            <Image src={product.image} alt={product.name} width={200} height={200} className="rounded" />
+            <h3 className="text-lg font-semibold mt-2">{product.name}</h3>
+            <p className="text-gray-600">Color: {product.color}</p>
+            <p className="text-gray-600">Variation: {product.variation}</p>
+            <p className="text-xl font-bold text-blue-600">${product.price}</p>
+            <p className="text-sm text-gray-500">Brand: {product.brand}</p>
+          </div>
         ))}
       </div>
     </div>

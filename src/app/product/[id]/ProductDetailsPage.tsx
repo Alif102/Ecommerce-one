@@ -79,7 +79,7 @@ const ProductDetailsPage = () => {
     <div className="max-w-5xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
       
       <div
-      className="relative  overflow-hidden rounded-lg"
+      className="relative bg-red-300 mx-auto  overflow-hidden rounded-lg"
       ref={imgRef}
       onMouseEnter={() => setShowLens(true)}
       onMouseLeave={() => setShowLens(false)}
@@ -180,7 +180,7 @@ const ProductDetailsPage = () => {
         </div>
 
         {/* Wishlist */}
-     <div className=" flex justify-between gap-3 text-sm">
+     <div className=" flex flex-wrap justify-between gap-3 text-sm">
      <button className="flex items-center gap-2 text-gray-600 hover:text-black">
           <HeartOutlined />
           Add to Wishlist

@@ -1,43 +1,15 @@
 'use client';
 
-import {  Dropdown, Drawer, MenuProps } from 'antd';
+import {   Drawer } from 'antd';
 import {  UserOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { MdKeyboardArrowDown } from 'react-icons/md';
 import { BiSearch } from 'react-icons/bi';
 import { FaBars, FaPlus, FaMinus } from 'react-icons/fa';
 import { HiSearch, HiShoppingCart } from 'react-icons/hi';
 import { useCart } from '@/app/providers/CartProvider';
+import { HiBars3CenterLeft } from 'react-icons/hi2';
 
-const items: MenuProps['items'] = [
-    {
-        key: 'categories',
-        label: (
-            <div className="grid grid-cols-2 gap-4 p-2">
-                <div>
-                    <span className="font-semibold">Mens</span>
-                    <div className="flex flex-col space-y-1 mt-1">
-                        <span>Half Sleeve T-shirt</span>
-                        <span>Full Sleeve T-shirt</span>
-                        <span>Drop Shoulder T-shirt</span>
-                        <span>Sports T-shirt</span>
-                    </div>
-                </div>
-                <div>
-                    <span className="font-semibold">Womens</span>
-                    <div className="flex flex-col space-y-1 mt-1">
-                        <span>T-Shirt</span>
-                        <span>Designer Pajamas</span>
-                        <span>Pants</span>
-                        <span>Palazzo</span>
-                        <span>Comfy Trouser</span>
-                    </div>
-                </div>
-            </div>
-        ),
-    },
-];
 
 const Navbar: React.FC = () => {
     const [showMinimalNavbar, setShowMinimalNavbar] = useState(false);
@@ -80,22 +52,20 @@ console.log(cartCount)
 
       {/* Main Navbar */}
       <nav className="flex items-center justify-between bg-white shadow-md px-8 md:px-24 py-4">
+
+      <div className='  flex gap-2 items-center'>
+      <div onClick={() => setSidebarOpen(true)} className="cursor-pointer">
+                    <HiBars3CenterLeft size={28} />
+                    </div>
         {/* Logo */}
         <Link href="/" className="text-2xl font-bold flex items-center">
           <span className="text-gray-900">My</span>
           <span className="text-gray-500">Shop</span>
         </Link>
 
-        {/* Shop Dropdown */}
-        <Dropdown
-                    menu={{ items }}
-                    trigger={['hover']}
-                    overlayClassName="p-2 bg-white shadow-lg rounded-md"
-                >
-                    <span className="cursor-pointer flex items-center text-lg font-semibold">
-                        Shop <MdKeyboardArrowDown className="ml-1" />
-                    </span>
-                </Dropdown>
+      </div>
+
+       
 
         {/* Search Input */}
         <div className="md:flex w-1/3 hidden">
@@ -114,7 +84,7 @@ console.log(cartCount)
 
         {/* Right Section - Help, Login, Cart */}
         <div className="flex items-center gap-6">
-          <Link href="/help" className="text-gray-700 text-sm hover:text-black">
+          <Link href="/help" className="text-gray-700 text-sm hidden md:block hover:text-black">
             Help
           </Link>
           <Link href="/login" className="text-gray-700 text-sm hover:text-black flex items-center">
@@ -145,7 +115,7 @@ console.log(cartCount)
                 <div className="flex gap-3 items-center">
                     {/* Bars Icon triggers the sidebar */}
                     <div onClick={() => setSidebarOpen(true)} className="cursor-pointer">
-                        <FaBars />
+                    <HiBars3CenterLeft size={28} />
                     </div>
                     <div>
                         {/* Logo */}

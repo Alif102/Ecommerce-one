@@ -6,6 +6,7 @@ import banner from "../../../../public/assets/bnr.jpg";
 import banner2 from "../../../../public/assets/bnr2.jpg";
 import left1 from '../../../../public/assets/left1.png'
 import right from '../../../../public/assets/right1.png'
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 const images = [banner2, banner]; // Array of images
 
 const Banner: React.FC = () => {
@@ -30,30 +31,31 @@ const Banner: React.FC = () => {
   return (
     <div className="relative w-full mx-auto overflow-hidden">
       {/* Images */}
-      <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
-        {images.map((img, index) => (
-          <div key={index} className="w-full flex-shrink-0">
-            <Image src={img} alt={`Banner ${index + 1}`} className="w-full h-auto" priority />
-          </div>
-        ))}
-      </div>
+      <div
+  className="flex transition-transform duration-500 ease-in-out"
+  style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+>
+  {images.map((img, index) => (
+    <div key={index} className="w-full flex-shrink-0">
+      <Image
+        src={img}
+        alt={`Banner ${index + 1}`}
+        className="w-full h-64 md:h-80 object-cover object-center lg:h-auto"
+        priority
+      />
+    </div>
+  ))}
+</div>
+
 
       {/* Left Button */}
       <button onClick={prevSlide} className="absolute left-2 top-1/2 transform -translate-y-1/2  bg-white hover:bg-yellow-300  p-2 rounded-full ">
-          <Image
-                         src = {left1}
-                         alt='arrow'
-                       
-                       />
+          <IoIosArrowBack />
       </button>
 
       {/* Right Button */}
       <button onClick={nextSlide} className="absolute right-2 top-1/2 transform -translate-y-1/2  hover:bg-yellow-300 bg-white p-2 rounded-full ">
-      <Image
-                         src = {right}
-                         alt='arrow'
-                       
-                       />
+      <IoIosArrowForward />
       </button>
 
       {/* Dots */}

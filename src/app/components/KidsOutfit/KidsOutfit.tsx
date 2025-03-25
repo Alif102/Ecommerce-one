@@ -81,8 +81,8 @@ export default function KidsOutfit() {
         {filteredProducts.map((product) => (
           <div
             key={product.id}
-            className="border p-4 rounded-lg shadow-md bg-white hover:shadow-xl transition-all duration-200"
-          >     <Link  href={`/product/${product.id}`}>
+            className="border p-4 rounded-lg shadow-md bg-white hover:shadow-xl transition-all duration-200">   
+            <Link  href={`/product/${product.id}`}>
             <div className="flex justify-center">
               <Image
                 src={product.image}

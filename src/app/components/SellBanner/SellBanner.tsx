@@ -3,6 +3,7 @@ import { ParallaxBanner } from "react-scroll-parallax";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS CSS for animations
 import { useEffect } from "react";
+import Link from "next/link";
 
 const SellBanner = () => {
   // Initialize AOS animation when the component is mounted
@@ -38,9 +39,11 @@ const SellBanner = () => {
                     <br />
                     Fashion Which is <span className="text-yellow-400">50% Off</span> Now
                   </h1>
+                  <Link href='/'>
                   <button className="px-8 py-4 bg-white text-black uppercase font-semibold rounded-md hover:bg-gray-300 transition">
                     Shop Now
                   </button>
+                  </Link>
                 </div>
               </div>
             ),

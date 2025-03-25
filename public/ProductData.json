@@ -75,6 +75,36 @@
 
         { "id": 38, "name": "Girls Knee-Length Dress", "image": "/assets/k3.webp", "color": "Multiple", "variation": "Size: M-XL", "price": 48.99, "brand": "KidsBrand", "category": "Best Selling Product" }
       ]
-    }
+    },
+    {
+      "id": 7,
+      "name": "Featured Products",
+      "image": "/assets/featured.png",
+      "products": [
+        { "id": 71, "name": "Classic Navy Slim Fit Blazer", "image": "/assets/f1.jpg", "price": 340, "originalPrice": 745, "label": "Hot deal" },
+        { "id": 72, "name": "A Fragrance Of Fashion", "image": "/assets/f2.jpg", "price": 1000, "originalPrice": 1145, "label": "SOLD OUT" },
+        { "id": 73, "name": "Cozy Chic Sweater", "image": "/assets/f4.jpg", "price": 800, "originalPrice": 1045, "label": "33% off" },
+        { "id": 74, "name": "A Fragrance Of Fashion", "image": "/assets/f3.jpg", "price": 300, "originalPrice": 445, "label": "SOLD OUT" }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Apparel",
+      "image": "/assets/featured.png",
+         "products": [
+           {  "id": 51,
+            "name": "Half-Sleeve shirt", "image": "/assets/p1.jpg", "price": 3300, "inStock": true, "sizes": ["S", "M", "L", "XL"], "colors": ["#ff0000", "#0000ff", "#00ff00"] },
+           {  "id": 52,
+            "name": "Designer Sleeve", "image": "/assets/p2.jpg", "price": 1100, "inStock": false, "sizes": ["M", "L"], "colors": ["#ff9900", "#6600cc"] },
+           {  "id": 53,
+            "name": "Sports T-shirt", "image": "/assets/p3.jpg", "price": 3000, "inStock": true, "sizes": ["S", "M"], "colors": ["#333333", "#ffffff"] },
+           {  "id": 54,
+            "name": "Polo", "image": "/assets/p4.jpg", "price": 1000, "inStock": true, "sizes": ["L", "XL"], "colors": ["#0099ff", "#ff3366", "#00cc99"] },
+           {  "id": 55,
+            "name": "Cut & Stitch Polo", "image": "/assets/p1.jpg", "price": 500, "inStock": false, "sizes": ["M", "L", "XL"], "colors": ["#ff0000", "#222222"] },
+           {  "id": 56,
+            "name": "Half Sleeve Raglan", "image": "/assets/p2.jpg", "price": 700, "inStock": true, "sizes": ["S", "M", "L"], "colors": ["#ff6600", "#0066ff"] }
+         ]
+       }
   ]
 }

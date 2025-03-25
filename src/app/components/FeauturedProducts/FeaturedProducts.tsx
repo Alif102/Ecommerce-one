@@ -1,61 +1,55 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Rate } from 'antd';
 import { HeartOutlined, EyeOutlined } from '@ant-design/icons';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import { FaShoppingCart } from 'react-icons/fa';
-import f1 from '../../../../public/assets/f1.jpg';
-import f2 from '../../../../public/assets/f2.jpg';
-import f4 from '../../../../public/assets/f4.jpg';
-import f3 from '../../../../public/assets/f3.jpg';
+import Link from 'next/link';
+import { useCart } from '@/app/providers/CartProvider';
 
-type Product = {
+// Define TypeScript Interfaces
+interface Product {
   id: number;
   name: string;
+  image: string;
   price: number;
   originalPrice?: number;
-  image: StaticImageData; // ✅ Fix: Use correct type
+  rating?: number;
   label?: string;
-  colors?: string[];
+  quantity: number;
+}
+
+interface Category {
+  name: string;
+  products: Product[];
+}
+
+// Function to Fetch Featured Products
+const fetchFeaturedProducts = async (): Promise<Product[]> => {
+  try {
+    const response = await fetch('/ProductData.json');
+    const data: { categories: Category[] } = await response.json(); // Define expected response structure
+    console.log("Fetched Data:", data); // Debugging Line
+
+    const featuredCategory = data.categories.find(
+      (category: Category) => category.name === "Featured Products"
+    );
+
+    return featuredCategory ? featuredCategory.products : [];
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    return [];
+  }
 };
-
-const products: Product[] = [
-  {
-    id: 1,
-    name: 'Classic Navy Slim Fit Blazer',
-    price: 300,
-    originalPrice: 345,
-    image: f1,
-    label: 'Hot deal',
-    colors: ['red', 'gray', 'black'],
-  },
-  {
-    id: 2,
-    name: 'A Fragrance Of Fashion',
-    price: 300,
-    image: f2,
-    label: 'SOLD OUT',
-  },
-  {
-    id: 3,
-    name: 'Cozy Chic Sweater',
-    price: 300,
-    originalPrice: 345,
-    image: f4,
-    label: '33% off',
-    colors: ['yellow', 'blue', 'purple', 'black'],
-  },
-  {
-    id: 4,
-    name: 'A Fragrance Of Fashion',
-    price: 300,
-    image: f3,
-    label: 'SOLD OUT',
-  },
-];
-
 const FeaturedProducts: React.FC = () => {
+  const [products, setProducts] = useState<Product[]>([]); // Define State Type
+  const { addToCart } = useCart(); // Move useCart inside the component
+
+  useEffect(() => {
+    fetchFeaturedProducts().then(setProducts);
+  }, []);
+
   return (
     <div className="text-center py-12">
       <h2 className="text-3xl font-bold">Best Feature Fashion</h2>
@@ -64,19 +58,21 @@ const FeaturedProducts: React.FC = () => {
       </p>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-6 mt-8">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <Link key={product.id} href={`/product/${product.id}`} passHref>
+            <ProductCard product={product} addToCart={addToCart} />
+          </Link>
         ))}
       </div>
     </div>
   );
 };
 
-const ProductCard: React.FC<{ product: Product }> = ({ product }) => { // ✅ Fix: Use Product type instead of 'any'
+const ProductCard: React.FC<{ product: Product; addToCart: (product: Product) => void }> = ({ product, addToCart }) => {
   const [hover, setHover] = useState(false);
 
   return (
     <div
-      className="relative mx-auto border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition cursor-pointer duration-3000"
+      className="relative mx-auto border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 cursor-pointer"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
@@ -85,50 +81,55 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => { // ✅ Fi
 
         {/* Label */}
         {product.label && (
-          <span className="absolute top-3 left-3 bg-black text-white font-semibold text-sm px-3 py-1 rounded">
+          <span className="absolute top-3 left-3 bg-red-500 text-white font-semibold text-xs px-3 py-1 rounded-md">
             {product.label}
           </span>
         )}
 
-        {/* Overlay Effect */}
+        {/* Hover Overlay */}
         <div
-          className={`absolute inset-0 bg-black bg-opacity-45 flex items-end justify-center transition-transform duration-500 ${
+          className={`absolute inset-0 bg-black bg-opacity-50 flex items-end justify-center transition-transform duration-500 ${
             hover ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'
-          } transform origin-bottom overlay`}
+          } transform origin-bottom`}
         >
-          <Button className="bg-white rounded-2xl text-gray-700 flex items-center mb-4 gap-2 px-6 py-5 transition-all duration-300 ease-in-out relative overflow-hidden group">
-  <span className="absolute inset-0 bg-black transform translate-y-full group-hover:translate-y-0 transition-all duration-300 ease-in-out"></span>
-  <span className="relative flex items-center gap-2 text-gray-700 group-hover:text-white transition-all duration-300">
-    <FaShoppingCart className="text-lg" />
-    Add To Cart
-  </span>
-</Button>
-
+          <Button
+            onClick={(event) => {
+              event.preventDefault(); // Prevents route change
+              addToCart({ ...product, quantity: product.quantity ?? 1 });
+            }}
+            className="bg-white rounded-full text-gray-700 flex items-center mb-4 gap-2 px-6 py-3 transition-all duration-300 ease-in-out relative overflow-hidden group"
+          >
+            <span className="absolute inset-0 bg-black transform translate-y-full group-hover:translate-y-0 transition-all duration-300 ease-in-out"></span>
+            <span className="relative flex items-center gap-2 text-gray-700 group-hover:text-white transition-all duration-300">
+              <FaShoppingCart className="text-lg" />
+              Add To Cart
+            </span>
+          </Button>
         </div>
 
         {/* Icons on Hover */}
         {hover && (
           <div className="absolute top-2 right-2 flex flex-col space-y-2">
-            <button className="bg-white p-2 rounded-full shadow-md">
+            <button className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition">
               <HeartOutlined className="text-gray-600" />
             </button>
-            <button className="bg-white p-2 rounded-full shadow-md">
+            <button className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition">
               <EyeOutlined className="text-gray-600" />
             </button>
           </div>
         )}
       </div>
 
-      <div className="p-4">
-        <Rate disabled defaultValue={5} className="text-yellow-500 flex justify-center mb-2" />
+      <div className="p-4 text-center">
+        <Rate disabled defaultValue={product.rating || 5} className="text-yellow-500 flex justify-center mb-2" />
         <h3 className="text-lg font-semibold">{product.name}</h3>
-        {product.originalPrice ? (
-          <p className="text-gray-500 line-through">${product.originalPrice}</p>
-        ) : null}
-        <p className="text-lg font-bold">${product.price}</p>
+        {product.originalPrice && <p className="text-gray-500 line-through">${product.originalPrice}</p>}
+        <p className="text-lg font-bold text-red-600">${product.price}</p>
       </div>
     </div>
   );
 };
 
 export default FeaturedProducts;
+
+

@@ -10,6 +10,7 @@ import "aos/dist/aos.css"; // Import AOS CSS
 
 interface Category {
   name: string;
+  id: number;
   image: string;
 }
 
@@ -22,7 +23,13 @@ const ShopByCategories: React.FC = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get("/ProductData.json");
-        setCategories(response.data.categories);
+
+        // Ensure data is in the correct format and filter out "Featured" and "Kids"
+        const filteredCategories = response.data.categories.filter(
+          (category: Category) => category.name !== "Featured Products" && category.name !== "Apparel" && category.name !== "Kids"
+        );
+
+        setCategories(filteredCategories); // Set the filtered categories
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
@@ -33,10 +40,7 @@ const ShopByCategories: React.FC = () => {
 
   return (
     <div className="w-full py-10 px-5">
-      <h2
-        className="text-2xl font-bold mb-10 text-center"
-        data-aos="fade-up"
-      >
+      <h2 className="text-2xl font-bold mb-10 text-center" data-aos="fade-up">
         Shop By Categories
       </h2>
 

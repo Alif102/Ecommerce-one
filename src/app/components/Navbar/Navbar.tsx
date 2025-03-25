@@ -5,7 +5,7 @@ import {  UserOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
-import { FaBars, FaPlus, FaMinus } from 'react-icons/fa';
+import {  FaPlus, FaMinus } from 'react-icons/fa';
 import { HiSearch, HiShoppingCart } from 'react-icons/hi';
 import { useCart } from '@/app/providers/CartProvider';
 import { HiBars3CenterLeft } from 'react-icons/hi2';
@@ -54,7 +54,7 @@ console.log(cartCount)
       <nav className="flex items-center justify-between bg-white shadow-md px-8 md:px-24 py-4">
 
       <div className='  flex gap-2 items-center'>
-      <div onClick={() => setSidebarOpen(true)} className="cursor-pointer">
+      <div onClick={() => setSidebarOpen(true)} className="cursor-pointer ">
                     <HiBars3CenterLeft size={28} />
                     </div>
         {/* Logo */}
@@ -114,7 +114,7 @@ console.log(cartCount)
             >
                 <div className="flex gap-3 items-center">
                     {/* Bars Icon triggers the sidebar */}
-                    <div onClick={() => setSidebarOpen(true)} className="cursor-pointer">
+                    <div onClick={() => setSidebarOpen(true)} className="cursor-pointer ">
                     <HiBars3CenterLeft size={28} />
                     </div>
                     <div>

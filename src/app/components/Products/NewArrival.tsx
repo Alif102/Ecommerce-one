@@ -32,7 +32,7 @@ export default function NewArrival() {
         const response = await fetch('/ProductData.json'); // Adjust the path as needed
         const data = await response.json();
         const apparelCategory = data.categories.find(
-          (category: any) => category.name === 'Apparel'
+          (category:  { name: string }) => category.name === 'Apparel'
         );
 
         if (apparelCategory) {

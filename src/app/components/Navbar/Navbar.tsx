@@ -87,7 +87,7 @@ console.log(cartCount)
           <Link href="/help" className="text-gray-700 text-sm hidden md:block hover:text-black">
             Help
           </Link>
-          <Link href="/login" className="text-gray-700 text-sm hover:text-black flex items-center">
+          <Link href="/sign-in" className="text-gray-700 text-sm hover:text-black flex items-center">
             <UserOutlined className="mr-1" /> Login
           </Link>
           <Link href="/cart">

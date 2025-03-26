@@ -5,6 +5,7 @@ import React from "react";
 import { Table, TableColumnsType } from "antd";
 import "antd/dist/reset.css";
 import Link from "next/link";
+import Navbar from "../components/Navbar/Navbar";
 
 interface CartItem {
   id: number;
@@ -86,7 +87,9 @@ const CartPage: React.FC = () => {
   ];
 
   return (
-    <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div>
+    <Navbar/>
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
           <h3 className="text-2xl font-semibold border-b border-t py-5 mb-6">My Shopping Cart</h3>
@@ -136,6 +139,7 @@ const CartPage: React.FC = () => {
         </div>
       </div>
     </div>
+  </div>
   );
 };
 

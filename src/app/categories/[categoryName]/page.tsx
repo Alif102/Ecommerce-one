@@ -10,6 +10,7 @@ import { HeartOutlined, EyeOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useCart } from "@/app/providers/CartProvider";
 import { BarsOutlined } from "@ant-design/icons";
+import Navbar from "@/app/components/Navbar/Navbar";
 
 interface Product {
   id: number;
@@ -76,7 +77,11 @@ const CategoryPage = () => {
   if (loading) return <div className="text-center py-10">Loading...</div>;
 
   return (
-    <div className="w-full pb-10 pt-3 px-5">
+    <div>
+      <div>
+        <Navbar/>
+      </div>
+      <div className="w-full pb-10 pt-3 px-5">
       {/* Category Banner */}
       <div
         className="relative bg-cover bg-center h-60 flex flex-col items-center justify-center text-white"
@@ -148,6 +153,7 @@ const CategoryPage = () => {
           setSelectedBrands={setSelectedBrands}
         />
       </Drawer>
+    </div>
     </div>
     </div>
   );
